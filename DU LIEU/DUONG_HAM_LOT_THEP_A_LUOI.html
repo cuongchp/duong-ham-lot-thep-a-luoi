@@ -592,9 +592,7 @@ function svRec(){
 }
 function shN(m){const n=document.getElementById('nf');n.textContent=m;n.classList.add('show');setTimeout(()=>n.classList.remove('show'),3000);}
 function tgLgd(h){const c=document.getElementById('lgdC'),a=document.getElementById('lgdArr');const hid=c.style.display==='none';c.style.display=hid?'grid':'none';a.innerHTML=hid?'&#9660;':'&#9658;';}
-const STATIC_DOCS=[
-  {name:'260515 BANG DU LIEU MANG XONG_OP DUONG HAM_CUONGDV.pdf',url:'TAI LIEU/260515 BANG DU LIEU MANG XONG_OP DUONG HAM_CUONGDV.pdf',size:'1.2 MB'}
-];
+let docCache=null;
 function fmtSize(n){if(n<1024)return n+' B';if(n<1048576)return (n/1024).toFixed(1)+' KB';return (n/1048576).toFixed(1)+' MB';}
 function setDocMode(on){
   document.getElementById('docPanel').style.display=on?'block':'none';
@@ -612,9 +610,18 @@ function showDocs(btn){
   renderDocs();
   document.getElementById('docPanel').scrollIntoView({behavior:'smooth',block:'start'});
 }
-function renderDocs(){
-  const el=document.getElementById('docList'),docs=STATIC_DOCS;
-  if(!docs.length){el.className='doc-empty';el.innerHTML='Chưa có tài liệu. Hãy đưa file vào thư mục DU LIEU/TAI LIEU và thêm vào STATIC_DOCS trong file HTML.';return;}
+async function getDocs(){
+  if(docCache)return docCache;
+  try{
+    const res=await fetch('tai-lieu.json?ts='+Date.now());
+    docCache=res.ok?await res.json():[];
+    if(!Array.isArray(docCache))docCache=[docCache];
+  }catch(e){docCache=[];}
+  return docCache;
+}
+async function renderDocs(){
+  const el=document.getElementById('docList'),docs=await getDocs();
+  if(!docs.length){el.className='doc-empty';el.innerHTML='Chưa có tài liệu. Hãy đưa file vào thư mục DU LIEU/TAI LIEU rồi chạy CAP_NHAT_GITHUB.cmd.';return;}
   el.className='doc-list';
   el.innerHTML=docs.map((d,i)=>`<div class="doc-card">
     <div class="doc-name">&#128196; ${d.name}</div>
@@ -624,8 +631,8 @@ function renderDocs(){
     </div>
   </div>`).join('');
 }
-function openDoc(i){
-  const doc=STATIC_DOCS[i];
+async function openDoc(i){
+  const docs=await getDocs(),doc=docs[i];
   if(doc)window.open(encodeURI(doc.url),'_blank');
 }
 function expCSV(){

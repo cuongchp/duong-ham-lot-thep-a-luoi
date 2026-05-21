@@ -15,6 +15,16 @@ if errorlevel 1 (
   exit /b 1
 )
 
+echo Dang cap nhat danh muc tai lieu...
+powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0TAO_DANH_MUC_TAI_LIEU.ps1"
+if errorlevel 1 (
+  echo.
+  echo Loi khi tao danh muc tai lieu.
+  pause
+  exit /b 1
+)
+echo.
+
 set HAS_CHANGES=
 for /f "delims=" %%i in ('git status --porcelain') do (
   set HAS_CHANGES=1
