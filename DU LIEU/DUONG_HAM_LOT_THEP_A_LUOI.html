@@ -593,10 +593,7 @@ function svRec(){
 function shN(m){const n=document.getElementById('nf');n.textContent=m;n.classList.add('show');setTimeout(()=>n.classList.remove('show'),3000);}
 function tgLgd(h){const c=document.getElementById('lgdC'),a=document.getElementById('lgdArr');const hid=c.style.display==='none';c.style.display=hid?'grid':'none';a.innerHTML=hid?'&#9660;':'&#9658;';}
 const STATIC_DOCS=[
-  {name:'260515 BANG DU LIEU MANG XONG_OP DUONG HAM-DH.pdf',url:'TAI LIEU/260515 BANG DU LIEU MANG XONG_OP DUONG HAM-DH.pdf',size:'286.4 KB'},
-  {name:'260515 BANG DU LIEU MANG XONG_OP DUONG HAM-DH.xlsx',url:'TAI LIEU/260515 BANG DU LIEU MANG XONG_OP DUONG HAM-DH.xlsx',size:'134.7 KB'},
-  {name:'260515 BANG DU LIEU MANG XONG_OP DUONG HAM_CUONGDV.pdf',url:'TAI LIEU/260515 BANG DU LIEU MANG XONG_OP DUONG HAM_CUONGDV.pdf',size:'1.2 MB'},
-  {name:'260515 BANG DU LIEU MANG XONG_OP DUONG HAM_CUONGDV.xlsx',url:'TAI LIEU/260515 BANG DU LIEU MANG XONG_OP DUONG HAM_CUONGDV.xlsx',size:'18.7 MB'}
+  {name:'260515 BANG DU LIEU MANG XONG_OP DUONG HAM_CUONGDV.pdf',url:'TAI LIEU/260515 BANG DU LIEU MANG XONG_OP DUONG HAM_CUONGDV.pdf',size:'1.2 MB'}
 ];
 function fmtSize(n){if(n<1024)return n+' B';if(n<1048576)return (n/1024).toFixed(1)+' KB';return (n/1048576).toFixed(1)+' MB';}
 function setDocMode(on){
