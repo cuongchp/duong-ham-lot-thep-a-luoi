@@ -80,7 +80,7 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:var(--g1);color:var(--g7
 .doc-meta{font-size:11px;color:var(--g5);margin-top:5px}
 .doc-actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
 .doc-empty{padding:26px;text-align:center;color:var(--g5);font-size:13px}
-.tw{background:#fff;border-radius:var(--r);box-shadow:var(--sh);overflow:hidden}
+.tw{background:#fff;border-radius:var(--r);box-shadow:var(--sh);overflow:hidden;margin-bottom:20px}
 .ts{overflow-x:auto}
 table{width:100%;border-collapse:collapse;min-width:700px}
 thead{background:linear-gradient(135deg,var(--bd),var(--b));color:#fff}
@@ -324,18 +324,6 @@ tfoot td{background:var(--bp);font-weight:700;font-size:12px;color:var(--bd);pad
     </div>
   </div>
 
-  <div class="lgd">
-    <h2 onclick="tgLgd(this)">&#128218; Hướng dẫn đọc ký hiệu <span id="lgdArr">&#9658;</span></h2>
-    <div class="lgd-grid" id="lgdC" style="display:none">
-      <div class="lgd-item"><strong>&#128204; Cấu trúc ký hiệu</strong><p><b>Ký tự 1 - Ký tự 2 - Ký tự 3 - Ký tự 4</b><br>Ví dụ: <code>01-CB-0,7m-5h</code></p></div>
-      <div class="lgd-item"><strong>1&#65039;&#8419; Ký tự 1: Số thứ tự đường hàn</strong><p>Số 1&ndash;151, tính từ phía sau Chạc 3 đến chân giếng đứng 2</p></div>
-      <div class="lgd-item"><strong>2&#65039;&#8419; Ký tự 2: Loại kiểm tra</strong><p><b>CB</b> = Các bon &bull; <b>TB</b> = Tấm bịt nút khoan phụt &bull; <b>Tap</b> = Tấm táp khuyết tật &amp; khoan phụt</p></div>
-      <div class="lgd-item"><strong>3&#65039;&#8419; Ký tự 3: Khoảng cách (m)</strong><p>Khoảng cách từ lý trình đường hàn đến thượng lưu.<br>Lý trình thực = Lý trình &minus; ký tự 3</p></div>
-      <div class="lgd-item"><strong>4&#65039;&#8419; Ký tự 4: Hướng giờ</strong><p>Theo đồng hồ, nhìn từ Chạc 3 về chân giếng đứng 2 (1h&ndash;12h)</p></div>
-      <div class="lgd-item"><strong>&#128279; Ký hiệu khác</strong><p><b>ĐH-XX</b> = Đường hàn số XX &bull; <b>ĐHĐS-XX</b> = Đường hàn đối xứng &bull; <b>MX</b> = Mối xuyên</p></div>
-    </div>
-  </div>
-
   <div class="ctrl">
     <input type="text" class="srch" id="srch" placeholder="Tìm theo STT, lý trình, phân đoạn, ký hiệu..." oninput="doSrch()">
     <button class="btn btn-p" onclick="opMo(null)">&#43; Thêm đường hàn</button>
@@ -355,6 +343,18 @@ tfoot td{background:var(--bp);font-weight:700;font-size:12px;color:var(--bd);pad
       </table>
     </div>
     <div class="pag" id="pg"></div>
+  </div>
+
+  <div class="lgd">
+    <h2 onclick="tgLgd(this)">&#128218; Hướng dẫn đọc ký hiệu <span id="lgdArr">&#9658;</span></h2>
+    <div class="lgd-grid" id="lgdC" style="display:none">
+      <div class="lgd-item"><strong>&#128204; Cấu trúc ký hiệu</strong><p><b>Ký tự 1 - Ký tự 2 - Ký tự 3 - Ký tự 4</b><br>Ví dụ: <code>01-CB-0,7m-5h</code></p></div>
+      <div class="lgd-item"><strong>1&#65039;&#8419; Ký tự 1: Số thứ tự đường hàn</strong><p>Số 1&ndash;151, tính từ phía sau Chạc 3 đến chân giếng đứng 2</p></div>
+      <div class="lgd-item"><strong>2&#65039;&#8419; Ký tự 2: Loại kiểm tra</strong><p><b>CB</b> = Các bon &bull; <b>TB</b> = Tấm bịt nút khoan phụt &bull; <b>Tap</b> = Tấm táp khuyết tật &amp; khoan phụt</p></div>
+      <div class="lgd-item"><strong>3&#65039;&#8419; Ký tự 3: Khoảng cách (m)</strong><p>Khoảng cách từ lý trình đường hàn đến thượng lưu.<br>Lý trình thực = Lý trình &minus; ký tự 3</p></div>
+      <div class="lgd-item"><strong>4&#65039;&#8419; Ký tự 4: Hướng giờ</strong><p>Theo đồng hồ, nhìn từ Chạc 3 về chân giếng đứng 2 (1h&ndash;12h)</p></div>
+      <div class="lgd-item"><strong>&#128279; Ký hiệu khác</strong><p><b>ĐH-XX</b> = Đường hàn số XX &bull; <b>ĐHĐS-XX</b> = Đường hàn đối xứng &bull; <b>MX</b> = Mối xuyên</p></div>
+    </div>
   </div>
 </div>
 
