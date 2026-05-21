@@ -46,6 +46,7 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:var(--g1);color:var(--g7
 .seg-info{font-size:10px;color:var(--g5);text-align:center;margin-top:5px;line-height:1.4}
 .seg-thick{font-size:11px;font-weight:700;color:var(--bd)}
 .sg{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-bottom:20px}
+.sg.one{grid-template-columns:minmax(220px,280px);justify-content:start}
 .sc{background:#fff;border-radius:var(--r);padding:16px 18px;box-shadow:var(--sh);border-left:4px solid var(--b);transition:box-shadow .2s;cursor:pointer}
 .sc:hover{box-shadow:var(--shl)}
 .sc.active{border-left-color:var(--bd);background:var(--bp)}
@@ -413,8 +414,11 @@ function pipeCountForCurrentRows(tot){
   return Math.max(0,tot-1);
 }
 function rSg(){
-  const mxAll=aD.filter(r=>isMX(r));
-  document.getElementById('sg').innerHTML=SECS.map(s=>{
+  const sg=document.getElementById('sg');
+  const visibleSecs=SECS.includes(cS)?[cS]:[];
+  sg.className=visibleSecs.length?'sg one':'sg';
+  if(!visibleSecs.length){sg.innerHTML='';return;}
+  sg.innerHTML=visibleSecs.map(s=>{
     const rs=aD.filter(r=>r.phan_doan===s),tk=rs.length?rs[0].chieu_day:'-';
     const segs=pipeCountForSection(s);
     const mxC=rs.filter(r=>isMX(r)).length;
