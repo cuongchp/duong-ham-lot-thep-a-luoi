@@ -23,6 +23,16 @@ for /f "delims=" %%i in ('git status --porcelain') do (
 if not defined HAS_CHANGES (
   echo Khong co thay doi nao de cap nhat.
   echo.
+  echo Dang kiem tra va day cac commit chua len GitHub...
+  git push origin main
+  if errorlevel 1 (
+    echo.
+    echo Loi khi git push. Kiem tra dang nhap GitHub hoac ket noi mang.
+    pause
+    exit /b 1
+  )
+  echo.
+  echo Da dong bo len GitHub thanh cong.
   pause
   exit /b 0
 )
@@ -47,7 +57,7 @@ if errorlevel 1 (
   exit /b 1
 )
 
-git push
+git push origin main
 if errorlevel 1 (
   echo.
   echo Loi khi git push. Kiem tra dang nhap GitHub hoac ket noi mang.
