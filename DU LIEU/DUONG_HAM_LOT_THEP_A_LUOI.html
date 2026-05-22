@@ -198,6 +198,8 @@ tfoot td{background:var(--bp);font-weight:700;font-size:12px;color:var(--bd);pad
 .hdr-seg-ticks .tick-mx1{width:3px;background:#facc15;box-shadow:0 0 0 1px rgba(15,23,42,.55),0 0 7px rgba(250,204,21,.9)}
 .hdr-seg-ticks .tick-mx2{width:3px;background:#22d3ee;box-shadow:0 0 0 1px rgba(15,23,42,.55),0 0 7px rgba(34,211,238,.9)}
 .hdr-seg-ticks .tick-mx3{width:3px;background:#fb7185;box-shadow:0 0 0 1px rgba(15,23,42,.55),0 0 7px rgba(251,113,133,.9)}
+.hdr-seg-ticks .tick-cbcv{position:relative}
+.hdr-seg-ticks .tick-cbcv:after{content:"";position:absolute;left:-1px;right:-1px;top:25%;bottom:25%;background:#020617;border-radius:2px;box-shadow:0 0 0 1px rgba(255,255,255,.35)}
 .hdr-seg-info2{width:100%;font-size:10px;color:rgba(255,255,255,.7);text-align:center;margin-top:4px;line-height:1.2;display:flex;align-items:center;justify-content:center;white-space:nowrap}
 .hdr-seg-thick{font-size:11px;font-weight:700;color:#fff}
 .hdr-seg-tab{width:100%;display:inline-flex;align-items:center;justify-content:center;padding:4px 4px;font-size:10px;line-height:1;border:0;min-height:21px;border-radius:5px;color:#fff;white-space:nowrap;box-shadow:inset 0 0 0 1px rgba(255,255,255,.22),0 1px 4px rgba(15,23,42,.18)}
@@ -236,7 +238,7 @@ tfoot td{background:var(--bp);font-weight:700;font-size:12px;color:var(--bd);pad
   </div>
   <!-- SƠ ĐỒ TỔNG THỂ TRONG HEADER -->
   <div class="hdr-ov">
-    <div class="hdr-ov-title">&#127778; <b>Sơ đồ tổng thể đường hầm</b> <span class="hdr-ov-hint">&mdash; nhấn vào phân đoạn để lọc</span><span class="hdr-legend"><span><i class="lg-plain"></i>Chưa MX</span><span><i class="lg-mx1"></i>1 MX</span><span><i class="lg-mx2"></i>2 MX</span><span><i class="lg-mx3"></i>3 MX</span></span></div>
+    <div class="hdr-ov-title">&#127778; <b>Sơ đồ tổng thể đường hầm</b><span class="hdr-legend"><span><i class="lg-plain"></i>Chưa MX</span><span><i class="lg-mx1"></i>1 MX</span><span><i class="lg-mx2"></i>2 MX</span><span><i class="lg-mx3"></i>3 MX</span></span></div>
     <div class="hdr-chainage" aria-label="Lý trình và đoạn địa chất yếu dự kiến">
       <div class="geo-band">Đoạn địa chất yếu, đi qua các đứt gãy bậc IV,V</div>
       <div class="km-mark" style="left:0%"><strong>Km11+667,421</strong></div>
@@ -735,8 +737,9 @@ function rHdrTicks(){
     el.innerHTML=rs.map(r=>{
       const mxC=mxCount(r);
       const cls=mxC?`tick-mx${Math.min(mxC,3)}`:'tick-plain';
-      const ttl=mxC?`${mxC} ký hiệu MX`:'Chưa có măng xông MX';
-      return `<div class="tick ${cls}" title="ĐH ${r.stt} - ${r.ly_trinh} - ${ttl}" onclick="event.stopPropagation();selectHdrWeld(${r.stt})"></div>`;
+      const cbcv=r.mo_ta_list.some(m=>m.toUpperCase().includes('CBCV'));
+      const ttl=(mxC?`${mxC} ký hiệu MX`:'Chưa có măng xông MX')+(cbcv?' - CBCV':'');
+      return `<div class="tick ${cls}${cbcv?' tick-cbcv':''}" title="ĐH ${r.stt} - ${r.ly_trinh} - ${ttl}" onclick="event.stopPropagation();selectHdrWeld(${r.stt})"></div>`;
     }).join('');
   });
 }
