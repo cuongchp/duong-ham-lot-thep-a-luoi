@@ -8,8 +8,8 @@
 :root{--bd:#0369a1;--b:#0ea5e9;--bl:#bae6fd;--bxl:#e0f2fe;--bp:#f0f9ff;--w:#fff;--g1:#f1f5f9;--g2:#e2e8f0;--g5:#64748b;--g7:#334155;--g9:#0f172a;--gr:#059669;--or:#d97706;--re:#dc2626;--sh:0 2px 8px rgba(3,105,161,.12);--shl:0 8px 24px rgba(3,105,161,.18);--r:10px;--page-pad:clamp(10px,1.2vw,24px)}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{width:100%;min-width:0;overflow-x:hidden}
-body{font-family:'Segoe UI',Arial,sans-serif;background:var(--g1);color:var(--g7);font-size:14px}
-.hdr{background:linear-gradient(135deg,#0369a1,#0284c7 60%,#0ea5e9);color:#fff;position:sticky;top:0;z-index:100;box-shadow:var(--shl)}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--g1);color:var(--g7);font-size:14px;padding-top:var(--hdr-h,0px)}
+.hdr{background:linear-gradient(135deg,#0369a1,#0284c7 60%,#0ea5e9);color:#fff;position:fixed;top:0;left:0;right:0;width:100%;z-index:500;box-shadow:var(--shl)}
 .hdr-in{width:100%;padding:14px var(--page-pad);display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .hdr-logo{width:46px;height:46px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
 .hdr-t{flex:1;min-width:200px}
@@ -692,8 +692,13 @@ function expCSV(){
 }
 function svLS(){try{localStorage.setItem('dhALuoi',JSON.stringify(aD));}catch(e){}}
 function ldLS(){try{const d=localStorage.getItem('dhALuoi');if(d){aD=JSON.parse(d);}}catch(e){}}
+function syncHdrSpace(){
+  const h=document.querySelector('.hdr');
+  if(h)document.documentElement.style.setProperty('--hdr-h',h.offsetHeight+'px');
+}
 document.getElementById('moOv').addEventListener('click',function(e){if(e.target===this)clMo();});
-ldLS();rSg();aF();
+window.addEventListener('resize',syncHdrSpace);
+ldLS();rSg();aF();syncHdrSpace();
 // Render tick marks trên sơ đồ header
 function rHdrTicks(){
   const pdMap={'PĐ 1':'ht-pd1','PĐ 2':'ht-pd2','PĐ 3':'ht-pd3','PĐ 4':'ht-pd4','PĐ 5':'ht-pd5','PĐ 6':'ht-pd6'};
@@ -709,6 +714,8 @@ function rHdrTicks(){
   });
 }
 rHdrTicks();
+syncHdrSpace();
+if(window.ResizeObserver)new ResizeObserver(syncHdrSpace).observe(document.querySelector('.hdr'));
 </script>
 </body>
 </html>
