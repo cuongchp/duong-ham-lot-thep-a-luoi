@@ -15,9 +15,9 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:var(--g1);color:var(--g7
 .hdr-t{flex:1;min-width:200px}
 .hdr-t h1{font-size:17px;font-weight:700;line-height:1.3}
 .hdr-t p{font-size:12px;opacity:.85;margin-top:2px}
-.hdr-bdg{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;white-space:nowrap}
 .main{width:100%;padding:20px var(--page-pad)}
 .tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
+.hdr .tabs{margin-left:auto;margin-bottom:0;justify-content:flex-end;align-items:center;max-width:min(1080px,58vw)}
 .tab{padding:7px 16px;border-radius:20px;border:2px solid var(--bl);background:#fff;color:var(--bd);font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
 .tab:hover{background:var(--bl)}
 .tab.active{background:var(--b);color:#fff;border-color:var(--b);box-shadow:0 2px 8px rgba(14,165,233,.35)}
@@ -183,7 +183,7 @@ tfoot td{background:var(--bp);font-weight:700;font-size:12px;color:var(--bd);pad
 .hdr-seg-thick{font-size:11px;font-weight:700;color:#fff}
 .hdr-seg-count{font-size:10px;color:rgba(255,255,255,.6)}
 .hdr-seg-range{font-size:9px;color:rgba(255,255,255,.4)}
-@media(max-width:768px){:root{--page-pad:10px}.sg{grid-template-columns:repeat(2,1fr)}.fr{grid-template-columns:1fr}.hdr-bdg{display:none}.ctrl{flex-direction:column;align-items:stretch}.srch{min-width:0}.hdr-ov{display:none}.diag-wrap,.lgd{padding:14px 12px}.doc-list{grid-template-columns:1fr;padding:12px}.tw{border-radius:8px}}
+@media(max-width:768px){:root{--page-pad:10px}.sg{grid-template-columns:repeat(2,1fr)}.fr{grid-template-columns:1fr}.ctrl{flex-direction:column;align-items:stretch}.srch{min-width:0}.hdr-ov{display:none}.diag-wrap,.lgd{padding:14px 12px}.doc-list{grid-template-columns:1fr;padding:12px}.tw{border-radius:8px}}
 @media(max-width:480px){:root{--page-pad:8px}.sg{grid-template-columns:1fr}.tabs{gap:4px}.tab{padding:5px 12px;font-size:12px}.main{padding-top:12px;padding-bottom:12px}.hdr-in{gap:10px}.hdr-logo{width:38px;height:38px;font-size:18px}.hdr-t h1{font-size:14px}.hdr-t p{font-size:11px}.diag-wrap h2{font-size:13px}.seg{min-width:82px}.nd-ic{width:34px;height:34px}.btn{justify-content:center}.mo-bd{padding:16px}.mo-ft{padding:14px 16px;flex-direction:column}.mo-ft .btn{width:100%}}
 </style>
 </head>
@@ -195,7 +195,17 @@ tfoot td{background:var(--bp);font-weight:700;font-size:12px;color:var(--bd);pad
       <h1>&#128232; ĐƯỜNG HẦM LÓT THÉP &mdash; NHÀ MÁY THỦY ĐIỆN A LƯỚI</h1>
       <p>Theo dõi măng xông ống &bull; Từ Chạc 3 đến Chân giếng đứng 2 &bull; Ban QLDA NMĐ A Lưới</p>
     </div>
-    <div class="hdr-bdg">&#128202; 151 Đường hàn &bull; 6 Phân đoạn</div>
+    <div class="tabs" id="tabs">
+      <button class="tab active" onclick="fSec('all',this)">Tất cả</button>
+      <button class="tab" onclick="fSec('PĐ 1',this)">Phân đoạn 1</button>
+      <button class="tab" onclick="fSec('PĐ 2',this)">Phân đoạn 2</button>
+      <button class="tab" onclick="fSec('PĐ 3',this)">Phân đoạn 3</button>
+      <button class="tab" onclick="fSec('PĐ 4',this)">Phân đoạn 4</button>
+      <button class="tab" onclick="fSec('PĐ 5',this)">Phân đoạn 5</button>
+      <button class="tab" onclick="fSec('PĐ 6',this)">Phân đoạn 6</button>
+      <button class="tab tab-mx" onclick="fSec('MX',this)">&#128279; Đường hàn MX</button>
+      <button class="tab tab-doc" onclick="showDocs(this)">&#128193; Tài liệu</button>
+    </div>
   </div>
   <!-- SƠ ĐỒ TỔNG THỂ TRONG HEADER -->
   <div class="hdr-ov">
@@ -258,18 +268,6 @@ tfoot td{background:var(--bp);font-weight:700;font-size:12px;color:var(--bd);pad
 </header>
 
 <div class="main">
-  <div class="tabs" id="tabs">
-    <button class="tab active" onclick="fSec('all',this)">Tất cả</button>
-    <button class="tab" onclick="fSec('PĐ 1',this)">Phân đoạn 1</button>
-    <button class="tab" onclick="fSec('PĐ 2',this)">Phân đoạn 2</button>
-    <button class="tab" onclick="fSec('PĐ 3',this)">Phân đoạn 3</button>
-    <button class="tab" onclick="fSec('PĐ 4',this)">Phân đoạn 4</button>
-    <button class="tab" onclick="fSec('PĐ 5',this)">Phân đoạn 5</button>
-    <button class="tab" onclick="fSec('PĐ 6',this)">Phân đoạn 6</button>
-    <button class="tab tab-mx" onclick="fSec('MX',this)">&#128279; Đường hàn MX</button>
-    <button class="tab tab-doc" onclick="showDocs(this)">&#128193; Tài liệu</button>
-  </div>
-
   <div class="doc-panel" id="docPanel">
     <div class="doc-hd">
       <div>
@@ -512,7 +510,7 @@ function fSec(s,btn){
   else{
     const ts=document.querySelectorAll('.tab');
     if(s==='all')ts[0].classList.add('active');
-    else if(s==='MX'){ts[ts.length-1].classList.add('active');}
+    else if(s==='MX'){const mx=[...ts].find(b=>b.classList.contains('tab-mx'));if(mx)mx.classList.add('active');}
     else{const i=['PĐ 1','PĐ 2','PĐ 3','PĐ 4','PĐ 5','PĐ 6'].indexOf(s)+1;if(ts[i])ts[i].classList.add('active');}
   }
   document.getElementById('mxPanel').style.display=(s==='MX')?'block':'none';
