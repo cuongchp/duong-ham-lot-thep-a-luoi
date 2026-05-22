@@ -16,7 +16,7 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:var(--g1);color:var(--g7
 .hdr-t h1{font-size:17px;font-weight:700;line-height:1.3}
 .hdr-t p{font-size:12px;opacity:.85;margin-top:2px}
 .ttl-mobile{display:none}
-.main{width:100%;padding:20px var(--page-pad)}
+.main{width:100%;padding:10px var(--page-pad) 20px}
 .tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
 .hdr .tabs{margin-left:auto;margin-bottom:0;justify-content:flex-end;align-items:center;max-width:min(620px,45vw);gap:6px}
 .tab{padding:7px 16px;border-radius:20px;border:2px solid var(--bl);background:#fff;color:var(--bd);font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
@@ -181,6 +181,8 @@ tfoot td{background:var(--bp);font-weight:700;font-size:12px;color:var(--bd);pad
 .km-mark strong{position:absolute;left:50%;bottom:100%;transform:translate(-50%,-5px);font-size:10px;font-weight:700;white-space:nowrap;color:rgba(255,255,255,.82);opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease}
 .km-mark.red{background:#facc15;width:2px}
 .km-mark.red strong{top:50%;bottom:auto;transform:translate(-50%,-50%);color:#fff;opacity:1;background:rgba(220,38,38,.95);padding:1px 5px;border-radius:999px;font-size:9px;line-height:1.25;z-index:3;box-shadow:0 0 0 1px rgba(255,255,255,.55)}
+.km-mark.red.km-start strong{transform:translate(calc(-100% - 6px),-50%)}
+.km-mark.red.km-end strong{transform:translate(6px,-50%)}
 .hdr-diag2{display:flex;align-items:stretch;gap:0}
 .hdr-nd{text-align:center;flex-shrink:0;padding:0 6px}
 .hdr-nd-ic{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;margin:0 auto 2px;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.4);color:#fff}
@@ -238,12 +240,12 @@ tfoot td{background:var(--bp);font-weight:700;font-size:12px;color:var(--bd);pad
     <div class="hdr-chainage" aria-label="Lý trình và đoạn địa chất yếu dự kiến">
       <div class="geo-band">Đoạn địa chất yếu, đi qua các đứt gãy bậc IV,V</div>
       <div class="km-mark" style="left:0%"><strong>Km11+667,421</strong></div>
-      <div class="km-mark red" style="left:23.01%"><strong>Km11+500</strong></div>
+      <div class="km-mark red km-start" style="left:23.01%"><strong>Km11+500</strong></div>
       <div class="km-mark" style="left:16.56%"><strong>Km11+551,225</strong></div>
       <div class="km-mark" style="left:23.84%"><strong>Km11+492,71</strong></div>
       <div class="km-mark" style="left:32.45%"><strong>Km11+423,58</strong></div>
       <div class="km-mark" style="left:56.29%"><strong>Km11+232,095</strong></div>
-      <div class="km-mark red" style="left:60.85%"><strong>Km11+200</strong></div>
+      <div class="km-mark red km-end" style="left:60.85%"><strong>Km11+200</strong></div>
       <div class="km-mark" style="left:86.75%"><strong>Km10+987,688</strong></div>
       <div class="km-mark" style="left:100%"><strong>Km10+886,719</strong></div>
     </div>
@@ -302,8 +304,7 @@ tfoot td{background:var(--bp);font-weight:700;font-size:12px;color:var(--bd);pad
   <div class="doc-panel" id="docPanel">
     <div class="doc-hd">
       <div>
-        <h2>&#128193; Tài liệu</h2>
-        <p>Các tài liệu được lưu cùng mã nguồn để mọi người mở được trên GitHub Pages.</p>
+        <h2>&#128193; Tài liệu liên quan</h2>
       </div>
     </div>
     <div class="doc-list" id="docList"></div>
