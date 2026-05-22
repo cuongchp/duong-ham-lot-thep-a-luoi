@@ -166,13 +166,22 @@ tfoot td{background:var(--bp);font-weight:700;font-size:12px;color:var(--bd);pad
 .hdr-legend i{display:inline-block;width:3px;height:13px;border-radius:2px;vertical-align:middle;margin-right:3px}
 .hdr-legend .lg-mx{background:#facc15;box-shadow:0 0 0 1px rgba(15,23,42,.55),0 0 7px rgba(250,204,21,.85)}
 .hdr-legend .lg-plain{background:rgba(255,255,255,.78);box-shadow:0 0 0 1px rgba(15,23,42,.35)}
-.hdr-chainage{position:relative;height:58px;margin:0 44px 6px 50px;background:rgba(255,255,255,.92);border:1px solid rgba(15,23,42,.25);overflow:hidden;color:#111;box-shadow:inset 0 0 0 1px rgba(255,255,255,.4)}
-.hdr-chainage:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(15,23,42,.12) 0,rgba(15,23,42,.12) 1px,transparent 1px,transparent 48px);pointer-events:none}
-.geo-band{position:absolute;top:0;bottom:0;left:21.45%;width:38.43%;background:#fed7aa;border-left:2px solid #111;border-right:2px solid #111;display:flex;align-items:flex-start;justify-content:center;padding-top:8px;font-size:13px;font-weight:700;color:#111;text-align:center}
-.km-mark{position:absolute;top:0;bottom:0;width:1px;background:rgba(15,23,42,.45)}
-.km-mark strong{position:absolute;left:4px;bottom:4px;writing-mode:vertical-rl;transform:rotate(180deg);font-size:12px;font-weight:500;white-space:nowrap;color:#111}
-.km-mark.red{background:#ef4444;width:2px}
-.km-mark.red strong{color:#ef0000;font-weight:700}
+.hdr-chainage{position:relative;height:18px;margin:0 44px 6px 50px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);overflow:visible;color:#fff;transition:height .22s ease,background .22s ease,border-radius .22s ease,box-shadow .22s ease}
+.hdr-chainage:before{content:"";position:absolute;left:0;right:0;top:50%;height:2px;transform:translateY(-50%);background:linear-gradient(90deg,rgba(255,255,255,.18),rgba(255,255,255,.7),rgba(255,255,255,.18));pointer-events:none}
+.hdr-chainage:after{content:"Rê chuột để xem lý trình";position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:10px;color:rgba(255,255,255,.68);letter-spacing:.2px}
+.hdr-ov:hover .hdr-chainage,.hdr-chainage:focus-within{height:64px;background:rgba(255,255,255,.94);border-color:rgba(14,165,233,.35);border-radius:8px;box-shadow:0 8px 22px rgba(15,23,42,.18);color:#0f172a}
+.hdr-ov:hover .hdr-chainage:before,.hdr-chainage:focus-within:before{background:repeating-linear-gradient(90deg,rgba(15,23,42,.11) 0,rgba(15,23,42,.11) 1px,transparent 1px,transparent 48px)}
+.hdr-ov:hover .hdr-chainage:after,.hdr-chainage:focus-within:after{opacity:0}
+.geo-band{position:absolute;top:3px;bottom:3px;left:21.45%;width:38.43%;background:linear-gradient(180deg,rgba(251,146,60,.95),rgba(254,215,170,.92));border:1px solid rgba(154,52,18,.55);border-radius:999px;display:flex;align-items:center;justify-content:center;padding:0 10px;font-size:10px;font-weight:800;color:#7c2d12;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hdr-ov:hover .geo-band,.hdr-chainage:focus-within .geo-band{top:0;bottom:0;border-radius:7px;font-size:12px;color:#111827}
+.km-mark{position:absolute;top:3px;bottom:3px;width:1px;background:rgba(255,255,255,.55)}
+.km-mark strong{position:absolute;left:50%;bottom:100%;transform:translate(-50%,-5px);font-size:10px;font-weight:700;white-space:nowrap;color:rgba(255,255,255,.82);opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease}
+.km-mark.red{background:#facc15;width:2px}
+.km-mark.red strong{color:#fee2e2;opacity:1}
+.hdr-ov:hover .km-mark,.hdr-chainage:focus-within .km-mark{top:0;bottom:0;background:rgba(15,23,42,.35)}
+.hdr-ov:hover .km-mark strong,.hdr-chainage:focus-within .km-mark strong{bottom:6px;writing-mode:vertical-rl;transform:translateX(-50%) rotate(180deg);font-size:11px;font-weight:600;color:#0f172a;opacity:1}
+.hdr-ov:hover .km-mark.red,.hdr-chainage:focus-within .km-mark.red{background:#ef4444}
+.hdr-ov:hover .km-mark.red strong,.hdr-chainage:focus-within .km-mark.red strong{color:#dc2626;font-weight:800}
 .hdr-diag2{display:flex;align-items:stretch;gap:0}
 .hdr-nd{text-align:center;flex-shrink:0;padding:0 6px}
 .hdr-nd-ic{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;margin:0 auto 2px;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.4);color:#fff}
