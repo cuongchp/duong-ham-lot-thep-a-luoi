@@ -36,6 +36,7 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:var(--g1);color:var(--g7
 .mx-badge{display:inline-block;padding:2px 7px;background:#f3e8ff;color:#6b21a8;border-radius:10px;font-size:10px;font-weight:700;margin-left:4px;border:1px solid #e9d5ff}
 .diag-wrap{background:#fff;border-radius:var(--r);padding:18px 20px;margin-bottom:20px;box-shadow:var(--sh)}
 .diag-wrap h2{font-size:14px;font-weight:700;color:var(--bd);margin-bottom:14px}
+.main>.diag-wrap{display:none}
 .diag{display:flex;align-items:stretch;overflow-x:auto;padding-bottom:6px;gap:0}
 .nd{text-align:center;flex-shrink:0}
 .nd-lbl{font-size:11px;color:var(--g5);margin-top:6px;white-space:nowrap}
@@ -188,8 +189,6 @@ tfoot td{background:var(--bp);font-weight:700;font-size:12px;color:var(--bd);pad
 .hdr-seg-ticks .tick-mx{width:3px;background:#facc15;box-shadow:0 0 0 1px rgba(15,23,42,.55),0 0 7px rgba(250,204,21,.9)}
 .hdr-seg-info2{font-size:10px;color:rgba(255,255,255,.7);text-align:center;margin-top:4px;line-height:1.4}
 .hdr-seg-thick{font-size:11px;font-weight:700;color:#fff}
-.hdr-seg-count{font-size:10px;color:rgba(255,255,255,.6)}
-.hdr-seg-range{font-size:9px;color:rgba(255,255,255,.4)}
 @media(max-width:768px){:root{--page-pad:10px}.sg{grid-template-columns:repeat(2,1fr)}.fr{grid-template-columns:1fr}.ctrl{flex-direction:column;align-items:stretch}.srch{min-width:0}.hdr-in{gap:10px;align-items:flex-start}.hdr-t{min-width:0}.hdr .tabs{order:3;width:100%;max-width:none;margin-left:0;justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;padding:0 2px 4px;scrollbar-width:none;-webkit-overflow-scrolling:touch}.hdr .tabs::-webkit-scrollbar{display:none}.hdr .tab{flex:0 0 auto;white-space:nowrap}.hdr-ov{display:block;overflow-x:auto;overflow-y:hidden;padding-top:4px;padding-bottom:10px;-webkit-overflow-scrolling:touch}.hdr-ov-title,.hdr-chainage,.hdr-diag2{min-width:760px}.diag-wrap,.lgd{padding:14px 12px}.doc-list{grid-template-columns:1fr;padding:12px}.tw{border-radius:8px}}
 @media(max-width:480px){:root{--page-pad:8px}.sg{grid-template-columns:1fr}.tabs{gap:4px}.tab{padding:5px 12px;font-size:12px}.main{padding-top:12px;padding-bottom:12px}.hdr-in{gap:8px;padding-top:10px;padding-bottom:8px}.hdr-logo{width:38px;height:38px;font-size:18px}.hdr-t h1{font-size:14px}.hdr-t p{font-size:11px}.hdr .tabs{gap:6px}.hdr .tab{padding:6px 13px;font-size:12px}.diag-wrap h2{font-size:13px}.seg{min-width:82px}.nd-ic{width:34px;height:34px}.btn{justify-content:center}.mo-bd{padding:16px}.mo-ft{padding:14px 16px;flex-direction:column}.mo-ft .btn{width:100%}}
 </style>
@@ -240,42 +239,42 @@ tfoot td{background:var(--bp);font-weight:700;font-size:12px;color:var(--bd);pad
           <div class="hdr-seg-ticks" id="ht-pd1"></div>
           PĐ 1
         </div>
-        <div class="hdr-seg-info2"><span class="hdr-seg-thick">38 mm</span><br><span class="hdr-seg-count">25 điểm</span><br><span class="hdr-seg-range">667→551</span></div>
+        <div class="hdr-seg-info2"><span class="hdr-seg-thick">38 mm</span></div>
       </div>
       <div class="hdr-seg2" onclick="openSegPop('PĐ 2',event)" style="flex:11">
         <div class="hdr-seg-bar2" style="background:linear-gradient(90deg,#166534,#16a34a)">
           <div class="hdr-seg-ticks" id="ht-pd2"></div>
           PĐ 2
         </div>
-        <div class="hdr-seg-info2"><span class="hdr-seg-thick">18 mm</span><br><span class="hdr-seg-count">11 điểm</span><br><span class="hdr-seg-range">551→492</span></div>
+        <div class="hdr-seg-info2"><span class="hdr-seg-thick">18 mm</span></div>
       </div>
       <div class="hdr-seg2" onclick="openSegPop('PĐ 3',event)" style="flex:13">
         <div class="hdr-seg-bar2" style="background:linear-gradient(90deg,#92400e,#d97706)">
           <div class="hdr-seg-ticks" id="ht-pd3"></div>
           PĐ 3
         </div>
-        <div class="hdr-seg-info2"><span class="hdr-seg-thick">20 mm</span><br><span class="hdr-seg-count">13 điểm</span><br><span class="hdr-seg-range">492→423</span></div>
+        <div class="hdr-seg-info2"><span class="hdr-seg-thick">20 mm</span></div>
       </div>
       <div class="hdr-seg2" onclick="openSegPop('PĐ 4',event)" style="flex:36">
         <div class="hdr-seg-bar2" style="background:linear-gradient(90deg,#831843,#db2777)">
           <div class="hdr-seg-ticks" id="ht-pd4"></div>
           PĐ 4
         </div>
-        <div class="hdr-seg-info2"><span class="hdr-seg-thick">20 mm</span><br><span class="hdr-seg-count">36 điểm</span><br><span class="hdr-seg-range">423→232</span></div>
+        <div class="hdr-seg-info2"><span class="hdr-seg-thick">20 mm</span></div>
       </div>
       <div class="hdr-seg2" onclick="openSegPop('PĐ 5',event)" style="flex:46">
         <div class="hdr-seg-bar2" style="background:linear-gradient(90deg,#5b21b6,#7c3aed)">
           <div class="hdr-seg-ticks" id="ht-pd5"></div>
           PĐ 5
         </div>
-        <div class="hdr-seg-info2"><span class="hdr-seg-thick">18 mm</span><br><span class="hdr-seg-count">46 điểm</span><br><span class="hdr-seg-range">232→987</span></div>
+        <div class="hdr-seg-info2"><span class="hdr-seg-thick">18 mm</span></div>
       </div>
       <div class="hdr-seg2" onclick="openSegPop('PĐ 6',event)" style="flex:20">
         <div class="hdr-seg-bar2" style="background:linear-gradient(90deg,#134e4a,#0d9488);border-radius:0 4px 4px 0">
           <div class="hdr-seg-ticks" id="ht-pd6"></div>
           PĐ 6
         </div>
-        <div class="hdr-seg-info2"><span class="hdr-seg-thick">22 mm</span><br><span class="hdr-seg-count">20 điểm</span><br><span class="hdr-seg-range">987→886</span></div>
+        <div class="hdr-seg-info2"><span class="hdr-seg-thick">22 mm</span></div>
       </div>
       <div class="hdr-nd">
         <div class="hdr-nd-ic">&#8593;</div>
