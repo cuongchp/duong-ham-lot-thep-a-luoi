@@ -165,7 +165,9 @@ tfoot td{background:var(--bp);font-weight:700;font-size:12px;color:var(--bd);pad
 .hdr-ov-hint{font-size:10px;color:rgba(255,255,255,.5);font-style:italic}
 .hdr-legend{display:inline-flex;align-items:center;gap:8px;margin-left:6px;font-size:10px;color:rgba(255,255,255,.82);font-style:normal}
 .hdr-legend i{display:inline-block;width:3px;height:13px;border-radius:2px;vertical-align:middle;margin-right:3px}
-.hdr-legend .lg-mx{background:#facc15;box-shadow:0 0 0 1px rgba(15,23,42,.55),0 0 7px rgba(250,204,21,.85)}
+.hdr-legend .lg-mx1{background:#facc15;box-shadow:0 0 0 1px rgba(15,23,42,.55),0 0 7px rgba(250,204,21,.85)}
+.hdr-legend .lg-mx2{background:#22d3ee;box-shadow:0 0 0 1px rgba(15,23,42,.55),0 0 7px rgba(34,211,238,.85)}
+.hdr-legend .lg-mx3{background:#fb7185;box-shadow:0 0 0 1px rgba(15,23,42,.55),0 0 7px rgba(251,113,133,.85)}
 .hdr-legend .lg-plain{background:rgba(255,255,255,.78);box-shadow:0 0 0 1px rgba(15,23,42,.35)}
 .hdr-chainage{position:relative;height:18px;margin:0 44px 6px 50px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);overflow:visible;color:#fff;transition:height .22s ease,background .22s ease,border-radius .22s ease,box-shadow .22s ease}
 .hdr-chainage:before{content:"";position:absolute;left:0;right:0;top:50%;height:2px;transform:translateY(-50%);background:linear-gradient(90deg,rgba(255,255,255,.18),rgba(255,255,255,.7),rgba(255,255,255,.18));pointer-events:none}
@@ -186,7 +188,9 @@ tfoot td{background:var(--bp);font-weight:700;font-size:12px;color:var(--bd);pad
 .hdr-seg-ticks .tick{border-radius:2px;margin:5px 0;pointer-events:auto;cursor:pointer;transition:transform .12s,box-shadow .12s}
 .hdr-seg-ticks .tick:hover{transform:scaleX(2.2)}
 .hdr-seg-ticks .tick-plain{width:2px;background:rgba(255,255,255,.78);box-shadow:0 0 0 1px rgba(15,23,42,.25)}
-.hdr-seg-ticks .tick-mx{width:3px;background:#facc15;box-shadow:0 0 0 1px rgba(15,23,42,.55),0 0 7px rgba(250,204,21,.9)}
+.hdr-seg-ticks .tick-mx1{width:3px;background:#facc15;box-shadow:0 0 0 1px rgba(15,23,42,.55),0 0 7px rgba(250,204,21,.9)}
+.hdr-seg-ticks .tick-mx2{width:3px;background:#22d3ee;box-shadow:0 0 0 1px rgba(15,23,42,.55),0 0 7px rgba(34,211,238,.9)}
+.hdr-seg-ticks .tick-mx3{width:3px;background:#fb7185;box-shadow:0 0 0 1px rgba(15,23,42,.55),0 0 7px rgba(251,113,133,.9)}
 .hdr-seg-info2{font-size:10px;color:rgba(255,255,255,.7);text-align:center;margin-top:4px;line-height:1.4}
 .hdr-seg-thick{font-size:11px;font-weight:700;color:#fff}
 @media(max-width:768px){:root{--page-pad:10px}.sg{grid-template-columns:repeat(2,1fr)}.fr{grid-template-columns:1fr}.ctrl{flex-direction:column;align-items:stretch}.srch{min-width:0}.hdr-in{gap:10px;align-items:flex-start}.hdr-t{min-width:0}.hdr .tabs{order:3;width:100%;max-width:none;margin-left:0;justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;padding:0 2px 4px;scrollbar-width:none;-webkit-overflow-scrolling:touch}.hdr .tabs::-webkit-scrollbar{display:none}.hdr .tab{flex:0 0 auto;white-space:nowrap}.hdr-ov{display:block;overflow-x:auto;overflow-y:hidden;padding-top:4px;padding-bottom:10px;-webkit-overflow-scrolling:touch}.hdr-ov-title,.hdr-chainage,.hdr-diag2{min-width:760px}.diag-wrap,.lgd{padding:14px 12px}.doc-list{grid-template-columns:1fr;padding:12px}.tw{border-radius:8px}}
@@ -215,7 +219,7 @@ tfoot td{background:var(--bp);font-weight:700;font-size:12px;color:var(--bd);pad
   </div>
   <!-- SƠ ĐỒ TỔNG THỂ TRONG HEADER -->
   <div class="hdr-ov">
-    <div class="hdr-ov-title">&#127778; <b>Sơ đồ tổng thể đường hầm</b> <span class="hdr-ov-hint">&mdash; nhấn vào phân đoạn để lọc</span><span class="hdr-legend"><span><i class="lg-mx"></i>Có MX</span><span><i class="lg-plain"></i>Chưa MX</span></span></div>
+    <div class="hdr-ov-title">&#127778; <b>Sơ đồ tổng thể đường hầm</b> <span class="hdr-ov-hint">&mdash; nhấn vào phân đoạn để lọc</span><span class="hdr-legend"><span><i class="lg-plain"></i>Chưa MX</span><span><i class="lg-mx1"></i>1 MX</span><span><i class="lg-mx2"></i>2 MX</span><span><i class="lg-mx3"></i>3 MX</span></span></div>
     <div class="hdr-chainage" aria-label="Lý trình và đoạn địa chất yếu dự kiến">
       <div class="geo-band">Đoạn địa chất yếu, đi qua các đứt gãy bậc IV,V</div>
       <div class="km-mark" style="left:0%"><strong>Km11+667,421</strong></div>
@@ -358,7 +362,7 @@ tfoot td{background:var(--bp);font-weight:700;font-size:12px;color:var(--bd);pad
   </div>
 
   <div class="ctrl">
-    <input type="text" class="srch" id="srch" placeholder="Tìm theo STT, lý trình, phân đoạn, ký hiệu..." oninput="doSrch()">
+    <input type="text" class="srch" id="srch" placeholder="Tìm theo ĐH, lý trình, phân đoạn, ký hiệu..." oninput="doSrch()">
     <button class="btn btn-p" onclick="opMo(null)">&#43; Thêm đường hàn</button>
     <button class="btn btn-o" onclick="expCSV()">&#8659; Xuất CSV</button>
     <span class="rc" id="rc"></span>
@@ -368,7 +372,7 @@ tfoot td{background:var(--bp);font-weight:700;font-size:12px;color:var(--bd);pad
     <div class="ts">
       <table id="tbl">
         <thead><tr>
-          <th>STT</th><th>Phân đoạn</th><th>Lý trình</th>
+          <th>ĐH</th><th>Phân đoạn</th><th>Lý trình</th>
           <th>Dày (mm)</th><th>Mô tả / Ký hiệu</th><th>Ghi chú</th><th>Thao tác</th>
         </tr></thead>
         <tbody id="tb"></tbody>
@@ -400,7 +404,7 @@ tfoot td{background:var(--bp);font-weight:700;font-size:12px;color:var(--bd);pad
     <div class="mo-hd"><h3 id="moTi">&#43; Thêm đường hàn</h3><button class="mo-cl" onclick="clMo()">&times;</button></div>
     <div class="mo-bd">
       <div class="fr">
-        <div class="fg"><label>STT *</label><input type="number" id="fStt" placeholder="VD: 152" min="1"></div>
+        <div class="fg"><label>ĐH *</label><input type="number" id="fStt" placeholder="VD: 152" min="1"></div>
         <div class="fg"><label>Phân đoạn *</label>
           <select id="fPd">
             <option value="PĐ 1">Phân đoạn 1</option><option value="PĐ 2">Phân đoạn 2</option>
@@ -439,7 +443,8 @@ const TC={'38':'#1e40af','20':'#166534','22':'#134e4a','18':'#5b21b6'};
 const SEG_THEME={'PĐ 1':['#1e40af','#2563eb'],'PĐ 2':['#166534','#16a34a'],'PĐ 3':['#92400e','#d97706'],'PĐ 4':['#831843','#db2777'],'PĐ 5':['#5b21b6','#7c3aed'],'PĐ 6':['#134e4a','#0d9488']};
 const SI={'PĐ 1':{r:'Km11+667 ÷ Km11+551',n:''},'PĐ 2':{r:'Km11+551 ÷ Km11+492',n:''},'PĐ 3':{r:'Km11+492 ÷ Km11+423',n:'⚠ Địa chất yếu - Đứt gãy IV,V'},'PĐ 4':{r:'Km11+423 ÷ Km11+232',n:'Đoạn dài nhất'},'PĐ 5':{r:'Km11+232 ÷ Km10+987',n:''},'PĐ 6':{r:'Km10+987 ÷ Km10+886',n:'Gần chân giếng đứng 2'}};
 function gc(c){if(!c)return '';if(c.startsWith('ĐH')&&!c.startsWith('ĐHĐS'))return 'dh';if(c.startsWith('ĐHĐS'))return 'dhds';if(c.includes('-CB-'))return 'cb';if(c.includes('-TB-')||c.includes('(TB)'))return 'tb';if(c.toLowerCase().includes('tap'))return 'tap';if(c.endsWith('-MX')||c.includes('-MX'))return 'mx';return '';}
-function isMX(r){return r.mo_ta_list.some(m=>m.includes('-MX'));}
+function mxCount(r){return r.mo_ta_list.filter(m=>m.includes('-MX')).length;}
+function isMX(r){return mxCount(r)>0;}
 const SECS=['PĐ 1','PĐ 2','PĐ 3','PĐ 4','PĐ 5','PĐ 6'];
 function pipeCountForSection(s){
   const rs=aD.filter(r=>r.phan_doan===s);
@@ -507,7 +512,7 @@ function rMX(){
   document.getElementById('mxLyTrinhList').innerHTML=mxRecs.map(r=>{
     const mxCodes=r.mo_ta_list.filter(m=>m.includes('-MX'));
     return `<span class="lt-chip" onclick="scrollToRow(${r.stt})" title="${mxCodes.join(', ')}">
-      <b>STT ${r.stt}</b> &mdash; ${r.ly_trinh}
+      <b>ĐH ${r.stt}</b> &mdash; ${r.ly_trinh}
       <span class="mx-badge">${mxCodes.length} MX</span>
     </span>`;
   }).join('');
@@ -548,7 +553,7 @@ function aF(){
     return String(r.stt).includes(cQ)||r.ly_trinh.toLowerCase().includes(cQ)||r.phan_doan.toLowerCase().includes(cQ)||r.chieu_day.includes(cQ)||r.mo_ta_list.some(m=>m.toLowerCase().includes(cQ))||(r.ghi_chu&&r.ghi_chu.toLowerCase().includes(cQ));
   });
   rTbl();rPag();
-  const label=cStt!==null?'đường hàn STT '+cStt:(cS==='MX'?'đường hàn MX':'đường hàn');
+  const label=cStt!==null?'ĐH '+cStt:(cS==='MX'?'đường hàn MX':'đường hàn');
   document.getElementById('rc').textContent=fD.length+' / '+aD.length+' '+label;
 }
 function hl(t){if(!cQ)return t;const re=new RegExp('('+cQ.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi');return t.replace(re,'<mark class="hl">$1</mark>');}
@@ -581,7 +586,7 @@ function rTbl(){
       </td>
     </tr>
     <tr class="ex-row" id="ex-${r.stt}" style="display:none"><td colspan="7"><div class="ex-ct">
-      <div class="ex-ti">&#128204; Toàn bộ ký hiệu tại ${r.ly_trinh} (STT ${r.stt})</div>
+      <div class="ex-ti">&#128204; Toàn bộ ký hiệu tại ${r.ly_trinh} (ĐH ${r.stt})</div>
       <div class="chip-wrap">${r.mo_ta_list.map(m=>`<span class="chip ${gc(m)}">${hl(m)}</span>`).join('')}</div>
       ${r.ghi_chu?`<div style="margin-top:10px;font-size:12px;color:#334155"><b>Ghi chú:</b> ${r.ghi_chu}</div>`:''}
     </div></td></tr>`;
@@ -632,7 +637,7 @@ function rPag(){
 function gP(p){const tot=Math.ceil(fD.length/PS);if(p<1||p>tot)return;cP=p;rTbl();rPag();document.getElementById('tbl').scrollIntoView({behavior:'smooth',block:'start'});}
 function opMo(idx){
   eI=idx;const mo=document.getElementById('moOv'),ti=document.getElementById('moTi');
-  if(idx!==null){const r=aD[idx];ti.textContent='✎ Chỉnh sửa đường hàn STT '+r.stt;
+  if(idx!==null){const r=aD[idx];ti.textContent='✎ Chỉnh sửa đường hàn ĐH '+r.stt;
     document.getElementById('fStt').value=r.stt;document.getElementById('fPd').value=r.phan_doan;
     document.getElementById('fLt').value=r.ly_trinh;document.getElementById('fCd').value=r.chieu_day;
     document.getElementById('fMt').value=r.mo_ta_list.join('\n');document.getElementById('fGc').value=r.ghi_chu||'';
@@ -649,8 +654,8 @@ function svRec(){
   const mt=document.getElementById('fMt').value.trim(),gc2=document.getElementById('fGc').value.trim();
   if(!stt||!pd||!lt||!cd){alert('Vui lòng điền đầy đủ các trường bắt buộc (*)');return;}
   const rec={stt,phan_doan:pd,ly_trinh:lt,chieu_day:cd,mo_ta_list:mt?mt.split('\n').filter(x=>x.trim()):[],ghi_chu:gc2};
-  if(eI!==null){aD[eI]=rec;shN('✓ Đã cập nhật đường hàn STT '+stt);}
-  else{aD.push(rec);aD.sort((a,b)=>a.stt-b.stt);shN('✓ Đã thêm đường hàn STT '+stt);}
+  if(eI!==null){aD[eI]=rec;shN('✓ Đã cập nhật đường hàn ĐH '+stt);}
+  else{aD.push(rec);aD.sort((a,b)=>a.stt-b.stt);shN('✓ Đã thêm đường hàn ĐH '+stt);}
   clMo();aF();rSg();rHdrTicks();svLS();
 }
 function shN(m){const n=document.getElementById('nf');n.textContent=m;n.classList.add('show');setTimeout(()=>n.classList.remove('show'),3000);}
@@ -699,7 +704,7 @@ async function openDoc(i){
   if(doc)window.open(encodeURI(doc.url),'_blank');
 }
 function expCSV(){
-  const rows=[['STT','Phan doan','Ly trinh','Chieu day (mm)','Mo ta','Ghi chu']];
+  const rows=[['DH','Phan doan','Ly trinh','Chieu day (mm)','Mo ta','Ghi chu']];
   fD.forEach(r=>rows.push([r.stt,r.phan_doan,r.ly_trinh,r.chieu_day,r.mo_ta_list.join(' | '),r.ghi_chu]));
   const csv=rows.map(r=>r.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(',')).join('\r\n');
   const a2=document.createElement('a');a2.href=URL.createObjectURL(new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'}));
@@ -723,9 +728,10 @@ function rHdrTicks(){
     if(!el)return;
     const rs=aD.filter(r=>r.phan_doan===pd);
     el.innerHTML=rs.map(r=>{
-      const cls=isMX(r)?'tick-mx':'tick-plain';
-      const ttl=isMX(r)?'Có măng xông MX':'Chưa có măng xông MX';
-      return `<div class="tick ${cls}" title="STT ${r.stt} - ${ttl}" onclick="event.stopPropagation();selectHdrWeld(${r.stt})"></div>`;
+      const mxC=mxCount(r);
+      const cls=mxC?`tick-mx${Math.min(mxC,3)}`:'tick-plain';
+      const ttl=mxC?`${mxC} ký hiệu MX`:'Chưa có măng xông MX';
+      return `<div class="tick ${cls}" title="ĐH ${r.stt} - ${r.ly_trinh} - ${ttl}" onclick="event.stopPropagation();selectHdrWeld(${r.stt})"></div>`;
     }).join('');
   });
 }
