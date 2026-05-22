@@ -192,9 +192,17 @@ tfoot td{background:var(--bp);font-weight:700;font-size:12px;color:var(--bd);pad
 .hdr-seg-ticks .tick-mx1{width:3px;background:#facc15;box-shadow:0 0 0 1px rgba(15,23,42,.55),0 0 7px rgba(250,204,21,.9)}
 .hdr-seg-ticks .tick-mx2{width:3px;background:#22d3ee;box-shadow:0 0 0 1px rgba(15,23,42,.55),0 0 7px rgba(34,211,238,.9)}
 .hdr-seg-ticks .tick-mx3{width:3px;background:#fb7185;box-shadow:0 0 0 1px rgba(15,23,42,.55),0 0 7px rgba(251,113,133,.9)}
-.hdr-seg-info2{font-size:10px;color:rgba(255,255,255,.7);text-align:center;margin-top:4px;line-height:1.2;display:flex;align-items:center;justify-content:center;gap:5px;white-space:nowrap}
+.hdr-seg-info2{width:100%;font-size:10px;color:rgba(255,255,255,.7);text-align:center;margin-top:4px;line-height:1.2;display:flex;align-items:center;justify-content:center;white-space:nowrap}
 .hdr-seg-thick{font-size:11px;font-weight:700;color:#fff}
-.hdr-seg-tab{display:inline-flex;align-items:center;justify-content:center;padding:2px 7px;font-size:11px;line-height:1;border-width:1px;min-height:20px;white-space:nowrap}
+.hdr-seg-tab{width:100%;display:inline-flex;align-items:center;justify-content:center;padding:4px 4px;font-size:10px;line-height:1;border:0;min-height:21px;border-radius:5px;color:#fff;white-space:nowrap;box-shadow:inset 0 0 0 1px rgba(255,255,255,.22),0 1px 4px rgba(15,23,42,.18)}
+.hdr-seg-tab:hover{filter:brightness(1.12)}
+.hdr-seg-tab.active{box-shadow:inset 0 0 0 2px rgba(255,255,255,.85),0 2px 8px rgba(15,23,42,.26)}
+.hdr-seg-tab.pd1{background:linear-gradient(90deg,#1e40af,#2563eb)}
+.hdr-seg-tab.pd2{background:linear-gradient(90deg,#166534,#16a34a)}
+.hdr-seg-tab.pd3{background:linear-gradient(90deg,#92400e,#d97706)}
+.hdr-seg-tab.pd4{background:linear-gradient(90deg,#831843,#db2777)}
+.hdr-seg-tab.pd5{background:linear-gradient(90deg,#5b21b6,#7c3aed)}
+.hdr-seg-tab.pd6{background:linear-gradient(90deg,#134e4a,#0d9488)}
 @media(max-width:768px){:root{--page-pad:10px}.sg{grid-template-columns:repeat(2,1fr)}.fr{grid-template-columns:1fr}.ctrl{flex-direction:column;align-items:stretch}.srch{min-width:0}.hdr-in{gap:10px;align-items:flex-start}.hdr-t{min-width:0}.hdr .tabs{max-width:none;width:100%;margin-left:0;justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;padding:0 2px 4px;scrollbar-width:none;-webkit-overflow-scrolling:touch}.hdr .tabs::-webkit-scrollbar{display:none}.hdr .tab{flex:0 0 auto;white-space:nowrap}.hdr-ov{display:block;overflow-x:auto;overflow-y:hidden;padding-top:4px;padding-bottom:10px;-webkit-overflow-scrolling:touch}.hdr-ov-title,.hdr-chainage,.hdr-diag2{min-width:760px}.diag-wrap,.lgd{padding:14px 12px}.doc-list{grid-template-columns:1fr;padding:12px}.tw{border-radius:8px}}
 @media(max-width:480px){:root{--page-pad:8px}.sg{grid-template-columns:1fr}.tabs{gap:4px}.tab{padding:5px 12px;font-size:12px}.main{padding-top:12px;padding-bottom:12px}.hdr-in{gap:8px;padding-top:10px;padding-bottom:8px}.hdr-logo{width:38px;height:38px;font-size:18px}.hdr-t h1{font-size:14px}.hdr-t p{font-size:11px}.hdr .tabs{gap:6px}.hdr .tab{padding:6px 13px;font-size:12px}.diag-wrap h2{font-size:13px}.seg{min-width:82px}.nd-ic{width:34px;height:34px}.btn{justify-content:center}.mo-bd{padding:16px}.mo-ft{padding:14px 16px;flex-direction:column}.mo-ft .btn{width:100%}}
 </style>
@@ -238,37 +246,37 @@ tfoot td{background:var(--bp);font-weight:700;font-size:12px;color:var(--bd);pad
         <div class="hdr-seg-bar2" style="background:linear-gradient(90deg,#1e40af,#2563eb);border-radius:4px 0 0 4px">
           <div class="hdr-seg-ticks" id="ht-pd1"></div>
         </div>
-        <div class="hdr-seg-info2"><button class="tab hdr-seg-tab" data-sec="PĐ 1" onclick="event.stopPropagation();fSec('PĐ 1',this)">PĐ 1</button><span class="hdr-seg-thick">38 mm</span></div>
+        <div class="hdr-seg-info2"><button class="tab hdr-seg-tab pd1" data-sec="PĐ 1" onclick="event.stopPropagation();fSec('PĐ 1',this)">PĐ 1 38mm</button></div>
       </div>
       <div class="hdr-seg2" onclick="openSegPop('PĐ 2',event)" style="flex:11">
         <div class="hdr-seg-bar2" style="background:linear-gradient(90deg,#166534,#16a34a)">
           <div class="hdr-seg-ticks" id="ht-pd2"></div>
         </div>
-        <div class="hdr-seg-info2"><button class="tab hdr-seg-tab" data-sec="PĐ 2" onclick="event.stopPropagation();fSec('PĐ 2',this)">PĐ 2</button><span class="hdr-seg-thick">18 mm</span></div>
+        <div class="hdr-seg-info2"><button class="tab hdr-seg-tab pd2" data-sec="PĐ 2" onclick="event.stopPropagation();fSec('PĐ 2',this)">PĐ 2 18mm</button></div>
       </div>
       <div class="hdr-seg2" onclick="openSegPop('PĐ 3',event)" style="flex:13">
         <div class="hdr-seg-bar2" style="background:linear-gradient(90deg,#92400e,#d97706)">
           <div class="hdr-seg-ticks" id="ht-pd3"></div>
         </div>
-        <div class="hdr-seg-info2"><button class="tab hdr-seg-tab" data-sec="PĐ 3" onclick="event.stopPropagation();fSec('PĐ 3',this)">PĐ 3</button><span class="hdr-seg-thick">20 mm</span></div>
+        <div class="hdr-seg-info2"><button class="tab hdr-seg-tab pd3" data-sec="PĐ 3" onclick="event.stopPropagation();fSec('PĐ 3',this)">PĐ 3 20mm</button></div>
       </div>
       <div class="hdr-seg2" onclick="openSegPop('PĐ 4',event)" style="flex:36">
         <div class="hdr-seg-bar2" style="background:linear-gradient(90deg,#831843,#db2777)">
           <div class="hdr-seg-ticks" id="ht-pd4"></div>
         </div>
-        <div class="hdr-seg-info2"><button class="tab hdr-seg-tab" data-sec="PĐ 4" onclick="event.stopPropagation();fSec('PĐ 4',this)">PĐ 4</button><span class="hdr-seg-thick">20 mm</span></div>
+        <div class="hdr-seg-info2"><button class="tab hdr-seg-tab pd4" data-sec="PĐ 4" onclick="event.stopPropagation();fSec('PĐ 4',this)">PĐ 4 20mm</button></div>
       </div>
       <div class="hdr-seg2" onclick="openSegPop('PĐ 5',event)" style="flex:46">
         <div class="hdr-seg-bar2" style="background:linear-gradient(90deg,#5b21b6,#7c3aed)">
           <div class="hdr-seg-ticks" id="ht-pd5"></div>
         </div>
-        <div class="hdr-seg-info2"><button class="tab hdr-seg-tab" data-sec="PĐ 5" onclick="event.stopPropagation();fSec('PĐ 5',this)">PĐ 5</button><span class="hdr-seg-thick">18 mm</span></div>
+        <div class="hdr-seg-info2"><button class="tab hdr-seg-tab pd5" data-sec="PĐ 5" onclick="event.stopPropagation();fSec('PĐ 5',this)">PĐ 5 18mm</button></div>
       </div>
       <div class="hdr-seg2" onclick="openSegPop('PĐ 6',event)" style="flex:20">
         <div class="hdr-seg-bar2" style="background:linear-gradient(90deg,#134e4a,#0d9488);border-radius:0 4px 4px 0">
           <div class="hdr-seg-ticks" id="ht-pd6"></div>
         </div>
-        <div class="hdr-seg-info2"><button class="tab hdr-seg-tab" data-sec="PĐ 6" onclick="event.stopPropagation();fSec('PĐ 6',this)">PĐ 6</button><span class="hdr-seg-thick">22 mm</span></div>
+        <div class="hdr-seg-info2"><button class="tab hdr-seg-tab pd6" data-sec="PĐ 6" onclick="event.stopPropagation();fSec('PĐ 6',this)">PĐ 6 22mm</button></div>
       </div>
       <div class="hdr-nd">
         <div class="hdr-nd-ic">&#8593;</div>
@@ -354,8 +362,6 @@ tfoot td{background:var(--bp);font-weight:700;font-size:12px;color:var(--bd);pad
   <div class="ctrl">
     <input type="text" class="srch" id="srch" placeholder="Tìm theo ĐH, lý trình, phân đoạn, ký hiệu..." oninput="doSrch()">
     <button class="btn btn-p" onclick="opMo(null)">&#43; Thêm đường hàn</button>
-    <button class="btn btn-o" onclick="expCSV()">&#8659; Xuất CSV</button>
-    <span class="rc" id="rc"></span>
   </div>
 
   <div class="tw">
@@ -543,7 +549,7 @@ function aF(){
   });
   rTbl();rPag();
   const label=cStt!==null?'ĐH '+cStt:(cS==='MX'?'đường hàn MX':'đường hàn');
-  document.getElementById('rc').textContent=fD.length+' / '+aD.length+' '+label;
+  const rc=document.getElementById('rc');if(rc)rc.textContent=fD.length+' / '+aD.length+' '+label;
 }
 function hl(t){if(!cQ)return t;const re=new RegExp('('+cQ.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi');return t.replace(re,'<mark class="hl">$1</mark>');}
 function rTbl(){
