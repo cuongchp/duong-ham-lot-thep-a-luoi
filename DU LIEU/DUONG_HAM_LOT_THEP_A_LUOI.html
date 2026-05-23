@@ -96,7 +96,9 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:var(--g1);color:var(--g7
 .seg-pop-ov{display:none;position:fixed;inset:0;z-index:900;background:rgba(15,23,42,.08);align-items:flex-start;justify-content:center;padding:150px 16px 16px}
 .seg-pop-ov.open{display:flex}
 .seg-pop{--dx:0px;--dy:0px;--seg-a:#0369a1;--seg-b:#0ea5e9;width:min(450px,calc(100vw - 28px));background:#fff;border-radius:14px;overflow:hidden;border:1px solid rgba(3,105,161,.14);box-shadow:0 24px 60px rgba(15,23,42,.28);animation:segZoom .32s cubic-bezier(.18,.9,.24,1);will-change:transform,opacity}
-.seg-pop-top{background:linear-gradient(90deg,var(--seg-a),var(--seg-b));color:#fff;padding:12px 14px;display:flex;align-items:center;gap:10px}
+.seg-pop.dragging{transition:none;box-shadow:0 28px 68px rgba(15,23,42,.34)}
+.seg-pop-top{background:linear-gradient(90deg,var(--seg-a),var(--seg-b));color:#fff;padding:12px 14px;display:flex;align-items:center;gap:10px;cursor:grab;user-select:none;touch-action:none}
+.seg-pop.dragging .seg-pop-top{cursor:grabbing}
 .seg-pop-dots{display:flex;gap:5px}.seg-pop-dots span{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.72)}
 .seg-pop-title{flex:1;font-size:13px;font-weight:800}
 .seg-pop-close{width:26px;height:26px;border:0;border-radius:50%;background:rgba(255,255,255,.18);color:#fff;font-size:18px;line-height:1;cursor:pointer}
@@ -266,37 +268,37 @@ tfoot td{background:var(--bp);font-weight:700;font-size:12px;color:var(--bd);pad
         <div class="hdr-seg-bar2" style="background:linear-gradient(90deg,#1e40af,#2563eb);border-radius:4px 0 0 4px">
           <div class="hdr-seg-ticks" id="ht-pd1"></div>
         </div>
-        <div class="hdr-seg-info2"><button class="tab hdr-seg-tab pd1" data-sec="PĐ 1" onclick="event.stopPropagation();fSec('PĐ 1',this)">PĐ 1 38mm</button></div>
+        <div class="hdr-seg-info2"><button class="tab hdr-seg-tab pd1" data-sec="PĐ 1" onclick="event.stopPropagation();fSec('PĐ 1',this)">PĐ1-38mm</button></div>
       </div>
       <div class="hdr-seg2" onclick="openSegPop('PĐ 2',event)" style="flex:11">
         <div class="hdr-seg-bar2" style="background:linear-gradient(90deg,#166534,#16a34a)">
           <div class="hdr-seg-ticks" id="ht-pd2"></div>
         </div>
-        <div class="hdr-seg-info2"><button class="tab hdr-seg-tab pd2" data-sec="PĐ 2" onclick="event.stopPropagation();fSec('PĐ 2',this)">PĐ 2 18mm</button></div>
+        <div class="hdr-seg-info2"><button class="tab hdr-seg-tab pd2" data-sec="PĐ 2" onclick="event.stopPropagation();fSec('PĐ 2',this)">PĐ2-18mm</button></div>
       </div>
       <div class="hdr-seg2" onclick="openSegPop('PĐ 3',event)" style="flex:13">
         <div class="hdr-seg-bar2" style="background:linear-gradient(90deg,#92400e,#d97706)">
           <div class="hdr-seg-ticks" id="ht-pd3"></div>
         </div>
-        <div class="hdr-seg-info2"><button class="tab hdr-seg-tab pd3" data-sec="PĐ 3" onclick="event.stopPropagation();fSec('PĐ 3',this)">PĐ 3 20mm</button></div>
+        <div class="hdr-seg-info2"><button class="tab hdr-seg-tab pd3" data-sec="PĐ 3" onclick="event.stopPropagation();fSec('PĐ 3',this)">PĐ3-20mm</button></div>
       </div>
       <div class="hdr-seg2" onclick="openSegPop('PĐ 4',event)" style="flex:36">
         <div class="hdr-seg-bar2" style="background:linear-gradient(90deg,#831843,#db2777)">
           <div class="hdr-seg-ticks" id="ht-pd4"></div>
         </div>
-        <div class="hdr-seg-info2"><button class="tab hdr-seg-tab pd4" data-sec="PĐ 4" onclick="event.stopPropagation();fSec('PĐ 4',this)">PĐ 4 20mm</button></div>
+        <div class="hdr-seg-info2"><button class="tab hdr-seg-tab pd4" data-sec="PĐ 4" onclick="event.stopPropagation();fSec('PĐ 4',this)">PĐ4-20mm</button></div>
       </div>
       <div class="hdr-seg2" onclick="openSegPop('PĐ 5',event)" style="flex:46">
         <div class="hdr-seg-bar2" style="background:linear-gradient(90deg,#5b21b6,#7c3aed)">
           <div class="hdr-seg-ticks" id="ht-pd5"></div>
         </div>
-        <div class="hdr-seg-info2"><button class="tab hdr-seg-tab pd5" data-sec="PĐ 5" onclick="event.stopPropagation();fSec('PĐ 5',this)">PĐ 5 18mm</button></div>
+        <div class="hdr-seg-info2"><button class="tab hdr-seg-tab pd5" data-sec="PĐ 5" onclick="event.stopPropagation();fSec('PĐ 5',this)">PĐ5-18mm</button></div>
       </div>
       <div class="hdr-seg2" onclick="openSegPop('PĐ 6',event)" style="flex:20">
         <div class="hdr-seg-bar2" style="background:linear-gradient(90deg,#134e4a,#0d9488);border-radius:0 4px 4px 0">
           <div class="hdr-seg-ticks" id="ht-pd6"></div>
         </div>
-        <div class="hdr-seg-info2"><button class="tab hdr-seg-tab pd6" data-sec="PĐ 6" onclick="event.stopPropagation();fSec('PĐ 6',this)">PĐ 6 22mm</button></div>
+        <div class="hdr-seg-info2"><button class="tab hdr-seg-tab pd6" data-sec="PĐ 6" onclick="event.stopPropagation();fSec('PĐ 6',this)">PĐ6-22mm</button></div>
       </div>
       <div class="hdr-nd">
         <div class="hdr-nd-ic">&#8593;</div>
@@ -488,7 +490,7 @@ function segStats(s){
 }
 function segPopupHtml(s){
   const st=segStats(s);
-  return `<div class="seg-pop-top">
+  return `<div class="seg-pop-top" onpointerdown="startSegPopDrag(event)">
     <div class="seg-pop-dots"><span></span><span></span><span></span></div>
     <div class="seg-pop-title">${s.replace('PĐ','Phân đoạn')}</div>
     <button class="seg-pop-close" onclick="closeSegPop()" title="Đóng">&times;</button>
@@ -506,6 +508,8 @@ function openSegPop(s,ev){
   fSec(s,null);
   const ov=document.getElementById('segPopOv'),pop=document.getElementById('segPop'),th=SEG_THEME[s]||['#0369a1','#0ea5e9'];
   pop.innerHTML=segPopupHtml(s);
+  pop.classList.remove('dragging');
+  pop.style.position='';pop.style.left='';pop.style.top='';pop.style.width='';
   pop.style.setProperty('--seg-a',th[0]);pop.style.setProperty('--seg-b',th[1]);
   ov.classList.add('open');
   const src=ev&&ev.currentTarget?ev.currentTarget.getBoundingClientRect():null;
@@ -515,6 +519,39 @@ function openSegPop(s,ev){
 function closeSegPop(ev){
   if(ev&&ev.target!==document.getElementById('segPopOv'))return;
   document.getElementById('segPopOv').classList.remove('open');
+}
+let segDrag=null;
+function startSegPopDrag(ev){
+  if(ev.button!==undefined&&ev.button!==0)return;
+  if(ev.target.closest('.seg-pop-close'))return;
+  const pop=document.getElementById('segPop');
+  const r=pop.getBoundingClientRect();
+  segDrag={dx:ev.clientX-r.left,dy:ev.clientY-r.top,w:r.width,h:r.height};
+  pop.style.animation='none';
+  pop.style.position='fixed';
+  pop.style.width=r.width+'px';
+  pop.style.left=r.left+'px';
+  pop.style.top=r.top+'px';
+  pop.classList.add('dragging');
+  pop.setPointerCapture?.(ev.pointerId);
+  window.addEventListener('pointermove',moveSegPopDrag);
+  window.addEventListener('pointerup',endSegPopDrag,{once:true});
+  ev.preventDefault();
+}
+function moveSegPopDrag(ev){
+  if(!segDrag)return;
+  const pop=document.getElementById('segPop');
+  const pad=8;
+  const x=Math.min(Math.max(pad,ev.clientX-segDrag.dx),window.innerWidth-segDrag.w-pad);
+  const y=Math.min(Math.max(pad,ev.clientY-segDrag.dy),window.innerHeight-segDrag.h-pad);
+  pop.style.left=x+'px';
+  pop.style.top=y+'px';
+}
+function endSegPopDrag(){
+  const pop=document.getElementById('segPop');
+  pop.classList.remove('dragging');
+  window.removeEventListener('pointermove',moveSegPopDrag);
+  segDrag=null;
 }
 function rMX(){
   const mxRecs=aD.filter(r=>isMX(r));
