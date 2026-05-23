@@ -88,6 +88,9 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:var(--g1);color:var(--g7
 .doc-name{font-size:13px;font-weight:700;color:var(--g9);word-break:break-word}
 .doc-meta{font-size:11px;color:var(--g5);margin-top:5px}
 .doc-actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.doc-summary{display:none;margin-top:10px;padding:10px 12px;border-radius:8px;background:#f8fafc;border:1px solid var(--g2);font-size:12px;line-height:1.5;color:var(--g7)}
+.doc-summary.open{display:block}
+.doc-summary b{color:#9a3412}
 .doc-empty{padding:26px;text-align:center;color:var(--g5);font-size:13px}
 .tw{background:#fff;border-radius:var(--r);box-shadow:var(--sh);overflow:hidden;margin-bottom:20px}
 .seg-pop-ov{display:none;position:fixed;inset:0;z-index:900;background:rgba(15,23,42,.08);align-items:flex-start;justify-content:center;padding:150px 16px 16px}
@@ -710,17 +713,29 @@ async function renderDocs(){
   const el=document.getElementById('docList'),docs=await getDocs();
   if(!docs.length){el.className='doc-empty';el.innerHTML='Chưa có tài liệu. Hãy đưa file vào thư mục DU LIEU/TAI LIEU rồi chạy CAP_NHAT_GITHUB.cmd.';return;}
   el.className='doc-list';
-  el.innerHTML=docs.map((d,i)=>`<div class="doc-card">
+  el.innerHTML=docs.map((d,i)=>{
+    const sm=(d.summary||'Chưa có nội dung tóm tắt cho tài liệu này.').replace(/\n/g,'<br>');
+    return `<div class="doc-card">
     <div class="doc-name">&#128196; ${d.name}</div>
     <div class="doc-meta">${d.size||''}</div>
     <div class="doc-actions">
       <button class="bsm be" onclick="openDoc(${i})">&#128065; Mở</button>
+      <button class="bsm bx" onclick="toggleDocSummary(${i},this)">&#9660; Tóm tắt</button>
     </div>
-  </div>`).join('');
+    <div class="doc-summary" id="docSum-${i}"><b>Tóm tắt:</b><br>${sm}</div>
+  </div>`;
+  }).join('');
 }
 async function openDoc(i){
   const docs=await getDocs(),doc=docs[i];
   if(doc)window.open(encodeURI(doc.url),'_blank');
+}
+function toggleDocSummary(i,btn){
+  const el=document.getElementById('docSum-'+i);
+  if(!el)return;
+  const open=!el.classList.contains('open');
+  el.classList.toggle('open',open);
+  if(btn)btn.innerHTML=open?'&#9650; Thu gọn':'&#9660; Tóm tắt';
 }
 function expCSV(){
   const rows=[['DH','Phan doan','Ly trinh','Chieu day (mm)','Mo ta','Ghi chu']];

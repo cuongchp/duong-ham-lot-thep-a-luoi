@@ -8,6 +8,20 @@ if (-not (Test-Path -LiteralPath $docDir)) {
   New-Item -ItemType Directory -Path $docDir | Out-Null
 }
 
+$oldSummary = @{}
+if (Test-Path -LiteralPath $outFile) {
+  try {
+    $oldDocs = Get-Content -LiteralPath $outFile -Raw -Encoding UTF8 | ConvertFrom-Json
+    foreach ($doc in @($oldDocs)) {
+      if ($doc.name) {
+        $oldSummary[$doc.name] = [string]$doc.summary
+      }
+    }
+  } catch {
+    $oldSummary = @{}
+  }
+}
+
 function Format-DocSize([long]$bytes) {
   if ($bytes -lt 1024) { return "$bytes B" }
   if ($bytes -lt 1048576) { return ("{0:N1} KB" -f ($bytes / 1024)) }
@@ -22,6 +36,7 @@ $docs = Get-ChildItem -LiteralPath $docDir -File |
       name = $_.Name
       url = "TAI LIEU/$($_.Name)"
       size = Format-DocSize $_.Length
+      summary = if ($oldSummary.ContainsKey($_.Name)) { $oldSummary[$_.Name] } else { "" }
     }
   }
 
