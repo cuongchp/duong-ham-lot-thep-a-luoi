@@ -215,10 +215,11 @@ tfoot td{background:var(--bp);font-weight:700;font-size:12px;color:var(--bd);pad
 .hdr-seg-tab.pd4{background:linear-gradient(90deg,#831843,#db2777)}
 .hdr-seg-tab.pd5{background:linear-gradient(90deg,#5b21b6,#7c3aed)}
 .hdr-seg-tab.pd6{background:linear-gradient(90deg,#134e4a,#0d9488)}
+.mobile-tip{display:none}
 @media(max-width:768px){:root{--page-pad:10px}.sg{grid-template-columns:repeat(2,1fr)}.fr{grid-template-columns:1fr}.ctrl{flex-direction:column;align-items:stretch}.hdr-tools{flex-direction:row;align-items:center;min-width:0;width:100%;max-width:none;order:3}.hdr-tools .srch{min-width:0}.srch{min-width:0}.hdr-in{gap:10px;align-items:flex-start}.hdr-t{min-width:0}.hdr .tabs{order:4;max-width:none;width:100%;margin-left:0;justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;padding:0 2px 4px;scrollbar-width:none;-webkit-overflow-scrolling:touch}.hdr .tabs::-webkit-scrollbar{display:none}.hdr .tab{flex:0 0 auto;white-space:nowrap}.hdr-ov{display:block;overflow-x:auto;overflow-y:hidden;padding-top:4px;padding-bottom:10px;-webkit-overflow-scrolling:touch}.hdr-ov-title,.hdr-chainage,.hdr-diag2{min-width:760px}.diag-wrap,.lgd{padding:14px 12px}.doc-list{grid-template-columns:1fr;padding:12px}.tw{border-radius:8px}}
 @media(max-width:600px){.hdr-tools{display:none!important}.ttl-full{display:none}.ttl-mobile{display:inline}}
 @media(max-width:480px){:root{--page-pad:8px}.sg{grid-template-columns:1fr}.tabs{gap:4px}.tab{padding:5px 12px;font-size:12px}.main{padding-top:12px;padding-bottom:12px}.hdr-in{gap:8px;padding-top:10px;padding-bottom:8px}.hdr-logo{width:38px;height:38px;font-size:18px}.hdr-t h1{font-size:14px}.hdr-t p{font-size:11px}.hdr .tabs{gap:6px}.hdr .tab{padding:6px 13px;font-size:12px}.diag-wrap h2{font-size:13px}.seg{min-width:82px}.nd-ic{width:34px;height:34px}.btn{justify-content:center}.mo-bd{padding:16px}.mo-ft{padding:14px 16px;flex-direction:column}.mo-ft .btn{width:100%}}
-@media(max-width:600px){.hdr-in{display:grid;grid-template-columns:32px minmax(0,1fr);column-gap:6px;row-gap:7px;align-items:center;padding-top:8px;padding-bottom:7px}.hdr-logo{grid-column:1;width:32px;height:32px;font-size:16px}.hdr-t{grid-column:2;min-width:0;overflow:hidden}.hdr-t h1{font-size:12.2px;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:clip}.hdr-t p{font-size:10.2px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:clip;margin-top:2px}.hdr .tabs{grid-column:1/-1;gap:6px;padding-bottom:2px}.hdr .tab{padding:6px 13px;font-size:12px}}
+@media(max-width:600px){.hdr-in{display:grid;grid-template-columns:32px minmax(0,1fr);column-gap:6px;row-gap:7px;align-items:center;padding-top:8px;padding-bottom:7px}.hdr-logo{grid-column:1;width:32px;height:32px;font-size:16px}.hdr-t{grid-column:2;min-width:0;overflow:hidden}.hdr-t h1{font-size:12.2px;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:clip}.hdr-t p{font-size:10.2px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:clip;margin-top:2px}.hdr .tabs{grid-column:1/-1;gap:6px;padding-bottom:2px}.hdr .tab{padding:6px 13px;font-size:12px}.mobile-tip{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 var(--page-pad) 8px;padding:8px 10px;border-radius:10px;background:#fef3c7;color:#78350f;border:1px solid rgba(251,191,36,.75);font-size:11px;font-weight:800;line-height:1.35;box-shadow:0 4px 12px rgba(15,23,42,.16)}.mobile-tip.hide{display:none}.mobile-tip button{flex:0 0 auto;border:0;border-radius:999px;background:#fff7ed;color:#92400e;font-size:10px;font-weight:800;padding:5px 8px;cursor:pointer}}
 @media(max-width:380px){.hdr-in{grid-template-columns:30px minmax(0,1fr);column-gap:5px}.hdr-logo{width:30px;height:30px;font-size:15px}.hdr-t h1{font-size:11.4px}.hdr-t p{font-size:9.6px}.hdr .tab{padding:5px 11px;font-size:11.4px}}
 </style>
 </head>
@@ -303,6 +304,10 @@ tfoot td{background:var(--bp);font-weight:700;font-size:12px;color:var(--bd);pad
         <div class="hdr-nd-km">Km10+886</div>
       </div>
     </div>
+  </div>
+  <div class="mobile-tip" id="mobileTip">
+    <span>NGƯỜI DÙNG XEM TRÊN MÁY TÍNH SẼ ĐƯỢC TRẢI NGHIỆM ĐẦY ĐỦ HƠN</span>
+    <button type="button" onclick="hideMobileTip()">Đã hiểu</button>
   </div>
 </header>
 
@@ -747,13 +752,24 @@ function expCSV(){
 }
 function svLS(){try{localStorage.setItem('dhALuoi',JSON.stringify(aD));}catch(e){}}
 function ldLS(){try{const d=localStorage.getItem('dhALuoi');if(d){aD=JSON.parse(d);}}catch(e){}}
+function initMobileTip(){
+  const el=document.getElementById('mobileTip');
+  if(!el)return;
+  try{if(localStorage.getItem('hideMobileTip')==='1')el.classList.add('hide');}catch(e){}
+}
+function hideMobileTip(){
+  const el=document.getElementById('mobileTip');
+  if(el)el.classList.add('hide');
+  try{localStorage.setItem('hideMobileTip','1');}catch(e){}
+  syncHdrSpace();
+}
 function syncHdrSpace(){
   const h=document.querySelector('.hdr');
   if(h)document.documentElement.style.setProperty('--hdr-h',h.offsetHeight+'px');
 }
 document.getElementById('moOv').addEventListener('click',function(e){if(e.target===this)clMo();});
 window.addEventListener('resize',syncHdrSpace);
-ldLS();rSg();aF();syncHdrSpace();
+ldLS();initMobileTip();rSg();aF();syncHdrSpace();
 // Render tick marks trên sơ đồ header
 function rHdrTicks(){
   const pdMap={'PĐ 1':'ht-pd1','PĐ 2':'ht-pd2','PĐ 3':'ht-pd3','PĐ 4':'ht-pd4','PĐ 5':'ht-pd5','PĐ 6':'ht-pd6'};
