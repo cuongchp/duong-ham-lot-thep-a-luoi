@@ -11,7 +11,8 @@ html,body{width:100%;min-width:0;overflow-x:hidden}
 body{font-family:'Segoe UI',Arial,sans-serif;background:var(--g1);color:var(--g7);font-size:14px;padding-top:var(--hdr-h,0px)}
 .hdr{background:linear-gradient(135deg,#0369a1,#0284c7 60%,#0ea5e9);color:#fff;position:fixed;top:0;left:0;right:0;width:100%;z-index:500;box-shadow:var(--shl)}
 .hdr-in{width:100%;padding:14px var(--page-pad);display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-.hdr-logo{width:46px;height:46px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.hdr-logo{width:46px;height:46px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;cursor:pointer;transition:background .18s,transform .18s}
+.hdr-logo:hover{background:rgba(255,255,255,.28);transform:translateY(-1px)}
 .hdr-t{flex:0 1 auto;min-width:200px}
 .hdr-t h1{font-size:17px;font-weight:700;line-height:1.3}
 .hdr-t p{font-size:12px;opacity:.85;margin-top:2px}
@@ -221,7 +222,7 @@ tfoot td{background:var(--bp);font-weight:700;font-size:12px;color:var(--bd);pad
 <body>
 <header class="hdr">
   <div class="hdr-in">
-    <div class="hdr-logo">&#127981;</div>
+    <button class="hdr-logo" type="button" onclick="goHome()" title="Về trang chủ">&#127981;</button>
     <div class="hdr-t">
       <h1><span class="ttl-full">ĐƯỜNG HẦM LÓT THÉP A LƯỚI-NHÀ MÁY THỦY ĐIỆN A LƯỚI</span><span class="ttl-mobile">ĐƯỜNG HẦM LÓT THÉP A LƯỚI-NMTDDAL</span></h1>
       <p>Theo dõi măng xông ống &bull; Từ Chạc 3 đến Chân giếng đứng 2</p>
@@ -543,6 +544,17 @@ function fSec(s,btn){
   document.getElementById('mxPanel').style.display=(s==='MX')?'block':'none';
   if(s==='MX')rMX();
   aF();rSg();
+}
+function goHome(){
+  cS='all';cQ='';cStt=null;cP=1;
+  const s=document.getElementById('srch');if(s)s.value='';
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+  const all=[...document.querySelectorAll('.tab')].find(b=>b.dataset.sec==='all');
+  if(all)all.classList.add('active');
+  document.getElementById('mxPanel').style.display='none';
+  setDocMode(false);
+  aF();rSg();
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 function doSrch(){cQ=document.getElementById('srch').value.toLowerCase();cStt=null;cP=1;aF();}
 function aF(){
