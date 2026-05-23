@@ -738,7 +738,7 @@ function rHdrTicks(){
       const mxC=mxCount(r);
       const cls=mxC?`tick-mx${Math.min(mxC,3)}`:'tick-plain';
       const cbcv=r.mo_ta_list.some(m=>m.toUpperCase().includes('CBCV'));
-      const ttl=(mxC?`${mxC} ký hiệu MX`:'Chưa có măng xông MX')+(cbcv?' - CBCV':'');
+      const ttl=(mxC?`${mxC} MX`:'Chưa MX')+(cbcv?' - CBCV':'');
       return `<div class="tick ${cls}${cbcv?' tick-cbcv':''}" title="ĐH ${r.stt} - ${r.ly_trinh} - ${ttl}" onclick="event.stopPropagation();selectHdrWeld(${r.stt})"></div>`;
     }).join('');
   });
