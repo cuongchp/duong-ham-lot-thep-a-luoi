@@ -54,25 +54,12 @@ if (-not $found) {
 $utf8noBom = New-Object System.Text.UTF8Encoding $false
 [System.IO.File]::WriteAllLines($htmlPath, $lines, $utf8noBom)
 
-# --- Cap nhat website/index.html (phien ban GitHub Pages) ---
+# --- Dong bo website/index.html = copy toan bo file chinh (1 nguon duy nhat) ---
 $webHtmlPath = Join-Path $dir "website\index.html"
-if (Test-Path $webHtmlPath) {
-    $webLines = [System.IO.File]::ReadAllLines($webHtmlPath, [System.Text.Encoding]::UTF8)
-    $webFound = $false
-    for ($i = 0; $i -lt $webLines.Length; $i++) {
-        if ($webLines[$i] -match '^const RD=\[') {
-            $webLines[$i] = "const RD=$compact;"
-            $webFound = $true
-            Write-Host "  website/index.html dong $($i+1): const RD da duoc thay the."
-            break
-        }
-    }
-    if ($webFound) {
-        [System.IO.File]::WriteAllLines($webHtmlPath, $webLines, $utf8noBom)
-    } else {
-        Write-Host "  Canh bao: Khong tim thay 'const RD=[' trong website/index.html" -ForegroundColor Yellow
-    }
-}
+$webDir = Split-Path $webHtmlPath -Parent
+if (-not (Test-Path $webDir)) { New-Item -ItemType Directory -Path $webDir | Out-Null }
+[System.IO.File]::WriteAllLines($webHtmlPath, $lines, $utf8noBom)
+Write-Host "  website/index.html: da dong bo tu file chinh."
 
 Write-Host ""
-Write-Host "HOAN THANH: Da nhung $count ban ghi tu DU_LIEU_DUONG_HAM.json vao HTML." -ForegroundColor Green
+Write-Host "HOAN THANH: Da nhung $count ban ghi va dong bo website/index.html." -ForegroundColor Green
