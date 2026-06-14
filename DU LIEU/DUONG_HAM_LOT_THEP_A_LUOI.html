@@ -291,7 +291,7 @@ tfoot td{background:var(--bp);font-weight:700;font-size:12px;color:var(--bd);pad
 .wp-head-s{font-size:11px;color:rgba(255,255,255,.82);margin-top:2px}
 .wp-close{width:30px;height:30px;border:0;border-radius:50%;background:rgba(255,255,255,.18);color:#fff;font-size:20px;line-height:1;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center}
 .wp-close:hover{background:rgba(255,255,255,.32)}
-.wp-body{padding:16px 20px 4px;background:linear-gradient(180deg,#fff,#f9f7ff)}
+.wp-body{padding:16px 20px 4px;background:linear-gradient(180deg,#fff,#f9f7ff);max-height:65vh;overflow-y:auto}
 .wp-pills{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px}
 .wp-pill{display:inline-flex;align-items:center;gap:5px;background:#f3f4f6;border:1px solid #e5e7eb;border-radius:999px;padding:4px 12px;font-size:12px;font-weight:700;color:#374151}
 .wp-sec{margin-bottom:12px}
@@ -1060,6 +1060,8 @@ function openWeldPop(stt){
     :'<span class="wp-empty">Chưa có MX</span>';
   const cbHtml=cbList.map(c=>`<span class="wp-cb-chip">${c}</span>`).join('');
   const tbHtml=tbList.map(t=>`<span class="wp-tb-chip">${t}</span>`).join('');
+  const dhList=r.mo_ta_list.filter(m=>m.startsWith('ĐH')||m.startsWith('ĐHĐS'));
+  const dhHtml=dhList.length?'<div class="wp-sec"><div class="wp-sec-title">&#128204; Ký hiệu đường hàn ('+dhList.length+' mục)</div><div class="chip-wrap">'+dhList.map(m=>'<span class="chip '+gc(m)+'">'+m+'</span>').join('')+'</div></div>':'';
   const allS=aD.slice().sort((a,b)=>a.stt-b.stt);
   const idx=allS.findIndex(x=>x.stt===stt);
   const prev=idx>0?allS[idx-1].stt:null;
@@ -1074,6 +1076,7 @@ function openWeldPop(stt){
   </div>
   <div class="wp-body">
     <div class="wp-pills"><span class="wp-pill">&#128205; ${r.ly_trinh}</span><span class="wp-pill">&#128231; ${r.phan_doan}</span></div>
+    ${dhHtml}
     <div class="wp-sec"><div class="wp-sec-title">&#128279; Măng xông (${mxList.length} vị trí)</div><div class="wp-mx-chips">${mxHtml}</div></div>
     ${cbList.length?`<div class="wp-sec"><div class="wp-sec-title">&#128295; Xử lý cơ bản CB (${cbList.length})</div><div class="wp-cb-chips">${cbHtml}</div></div>`:''}
     ${tbList.length?`<div class="wp-sec"><div class="wp-sec-title">&#9650; Tăng cường TB (${tbList.length})</div><div class="wp-cb-chips">${tbHtml}</div></div>`:''}
