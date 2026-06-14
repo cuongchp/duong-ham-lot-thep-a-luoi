@@ -30,6 +30,27 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:var(--g1);color:var(--g7
 .tab-doc{border-color:#fed7aa;color:#9a3412;background:#fff7ed}
 .tab-doc:hover{background:#fed7aa}
 .tab-doc.active{background:#ea580c;color:#fff;border-color:#ea580c;box-shadow:0 2px 8px rgba(234,88,12,.35)}
+.tab-ov{border-color:#a5f3fc;color:#0e7490;background:#ecfeff}
+.tab-ov:hover{background:#cffafe}
+.tab-ov.active{background:#0891b2;color:#fff;border-color:#0891b2;box-shadow:0 2px 8px rgba(8,145,178,.35)}
+.ov-panel{display:none;margin-bottom:20px}
+.ov-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+@media(max-width:680px){.ov-kpis{grid-template-columns:repeat(2,1fr)}}
+.ov-kpi{background:#fff;border-radius:12px;box-shadow:var(--sh);padding:18px 20px;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.ov-kpi:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(15,23,42,.14)}
+.ov-kpi-n{font-size:42px;font-weight:900;line-height:1}
+.ov-kpi-l{font-size:11px;font-weight:700;color:#64748b;margin-top:6px;text-transform:uppercase;letter-spacing:.4px}
+.ov-chart{background:#fff;border-radius:12px;box-shadow:var(--sh);padding:18px 22px}
+.ov-chart-t{font-size:13px;font-weight:800;color:#374151;margin-bottom:16px}
+.ov-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+.ov-bar-lbl{width:50px;font-size:12px;font-weight:700;color:#374151;text-align:right;flex-shrink:0}
+.ov-bar-track{flex:1;height:26px;background:#f1f5f9;border-radius:6px;overflow:hidden;display:flex}
+.ov-bar-21{height:100%;display:flex;align-items:center;padding-left:7px;font-size:11px;font-weight:800;color:#fff;transition:width .55s ease;white-space:nowrap;overflow:hidden}
+.ov-bar-22{height:100%;display:flex;align-items:center;padding-left:6px;font-size:11px;font-weight:800;color:#fff;transition:width .55s ease;white-space:nowrap;overflow:hidden}
+.ov-bar-meta{font-size:11px;font-weight:700;color:#374151;width:52px;flex-shrink:0;text-align:right}
+tr.mx1{background:#fefce8}
+tr.mx2{background:#fff7ed}
+tr.mx3p{background:#fef2f2}
 .mx-seg-card{background:#fff;border-radius:8px;padding:12px 14px;border-left:4px solid #7c3aed;box-shadow:var(--sh)}
 .mx-seg-card .msn{font-size:22px;font-weight:800;color:#6b21a8}
 .mx-seg-card .mst{font-size:11px;font-weight:700;color:#6b21a8;margin-bottom:4px}
@@ -293,6 +314,7 @@ tfoot td{background:var(--bp);font-weight:700;font-size:12px;color:var(--bd);pad
       <button class="btn btn-p" onclick="opMo(null)">&#43; Thêm đường hàn</button>
     </div>
     <div class="tabs">
+      <button class="tab tab-ov" data-sec="ov" onclick="showDashboard(this)">&#128202; Tổng quan</button>
       <button class="tab active" data-sec="all" onclick="fSec('all',this)">Tất cả</button>
       <button class="tab tab-mx" data-sec="MX" onclick="fSec('MX',this)">&#128279; Đường hàn MX</button>
       <button class="tab tab-doc" data-sec="docs" onclick="showDocs(this)">&#128193; Tài liệu</button>
@@ -379,6 +401,8 @@ tfoot td{background:var(--bp);font-weight:700;font-size:12px;color:var(--bd);pad
 </header>
 
 <div class="main">
+  <div class="ov-panel" id="ovPanel"></div>
+
   <div class="doc-panel" id="docPanel">
     <div class="doc-hd">
       <div>
@@ -733,7 +757,8 @@ function rTbl(){
     const tp=r.mo_ta_list.filter(m=>m.toLowerCase().includes('tap')).length;
     const mxC=r.mo_ta_list.filter(m=>m.includes('-MX')).length;
     const oi=aD.findIndex(x=>x.stt===r.stt);
-    return `<tr id="row-${r.stt}">
+    const mxCls=mxC===1?'mx1':mxC===2?'mx2':mxC>=3?'mx3p':'';
+    return `<tr id="row-${r.stt}"${mxCls?` class="${mxCls}"`:''}>
       <td class="ts-stt">${hl(String(r.stt))}</td>
       <td class="ts-pd"><span class="pd-b ${pc}">${r.phan_doan}</span>${mxC?`<br><span class="mx-badge" style="display:inline-block;margin-top:3px">MX</span>`:''}</td>
       <td class="ts-lt">${hl(r.ly_trinh)}</td>
@@ -832,11 +857,72 @@ let docCache=null;
 function fmtSize(n){if(n<1024)return n+' B';if(n<1048576)return (n/1024).toFixed(1)+' KB';return (n/1048576).toFixed(1)+' MB';}
 function setDocMode(on){
   document.getElementById('docPanel').style.display=on?'block':'none';
+  document.getElementById('ovPanel').style.display='none';
   const items=['.diag-wrap','#sg','.lgd','.ctrl','.tw'];
   items.forEach(sel=>{
     const el=document.querySelector(sel);
     if(el)el.style.display=on?'none':'';
   });
+}
+function showDashboard(btn){
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  document.getElementById('mxPanel').style.display='none';
+  setDocMode(false);
+  const items=['.diag-wrap','#sg','.lgd','.ctrl','.tw'];
+  items.forEach(sel=>{const el=document.querySelector(sel);if(el)el.style.display='none';});
+  document.getElementById('ovPanel').style.display='block';
+  renderDashboard();
+  document.getElementById('ovPanel').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function renderDashboard(){
+  const total=aD.length;
+  const mxRecs=aD.filter(r=>isMX(r));
+  const allMxEntries=aD.flatMap(r=>r.mo_ta_list.filter(m=>m.includes('-MX')));
+  const n21=allMxEntries.filter(m=>m.includes('[2021]')).length;
+  const n22=allMxEntries.filter(m=>m.includes('[2022]')).length;
+  const segs=['PĐ 1','PĐ 2','PĐ 3','PĐ 4','PĐ 5','PĐ 6'];
+  const sd=segs.map(s=>{
+    const recs=aD.filter(r=>r.phan_doan===s);
+    const mx=recs.filter(r=>isMX(r));
+    const entries=recs.flatMap(r=>r.mo_ta_list.filter(m=>m.includes('-MX')));
+    return {pd:s,tot:recs.length,mx:mx.length,m21:entries.filter(m=>m.includes('[2021]')).length,m22:entries.filter(m=>m.includes('[2022]')).length};
+  });
+  const maxMx=Math.max(...sd.map(s=>s.mx),1);
+  document.getElementById('ovPanel').innerHTML=`
+    <div class="ov-kpis">
+      <div class="ov-kpi" style="border-top:3px solid #0ea5e9" onclick="fSec('all',null)">
+        <div class="ov-kpi-n" style="color:#0369a1">${total}</div>
+        <div class="ov-kpi-l">Tổng điểm đo</div>
+      </div>
+      <div class="ov-kpi" style="border-top:3px solid #7c3aed" onclick="fSec('MX',null)">
+        <div class="ov-kpi-n" style="color:#6b21a8">${mxRecs.length}</div>
+        <div class="ov-kpi-l">Vị trí có MX</div>
+      </div>
+      <div class="ov-kpi" style="border-top:3px solid #a855f7" onclick="fSec('MX',null)">
+        <div class="ov-kpi-n" style="color:#7c3aed">${n21}</div>
+        <div class="ov-kpi-l">MX năm 2021</div>
+      </div>
+      <div class="ov-kpi" style="border-top:3px solid #f59e0b" onclick="fSec('MX',null)">
+        <div class="ov-kpi-n" style="color:#b45309">${n22}</div>
+        <div class="ov-kpi-l">MX năm 2022</div>
+      </div>
+    </div>
+    <div class="ov-chart">
+      <div class="ov-chart-t">&#128202; MX theo phân đoạn &nbsp;<span style="font-size:11px;font-weight:600"><span style="color:#7c3aed">&#9632; 2021</span> &nbsp;<span style="color:#f59e0b">&#9632; 2022</span></span></div>
+      ${sd.map(s=>{
+        const th=SEG_THEME[s.pd]||['#374151','#6b7280'];
+        const p21=Math.round(s.m21/maxMx*100),p22=Math.round(s.m22/maxMx*100);
+        return `<div class="ov-bar-row">
+          <div class="ov-bar-lbl" style="cursor:pointer;color:${th[0]}" onclick="fSec('${s.pd}',null)">${s.pd}</div>
+          <div class="ov-bar-track">
+            <div class="ov-bar-21" style="width:${p21}%;background:${th[0]}">${s.m21>0?s.m21:''}</div>
+            <div class="ov-bar-22" style="width:${p22}%;background:#f59e0b">${s.m22>0?s.m22:''}</div>
+          </div>
+          <div class="ov-bar-meta">MX:${s.mx}/${s.tot}</div>
+        </div>`;
+      }).join('')}
+    </div>`;
 }
 function showDocs(btn){
   document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
