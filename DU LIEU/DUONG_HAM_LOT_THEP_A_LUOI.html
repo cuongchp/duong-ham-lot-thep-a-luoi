@@ -34,12 +34,15 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:var(--g1);color:var(--g7
 .tab-ov:hover{background:#cffafe}
 .tab-ov.active{background:#0891b2;color:#fff;border-color:#0891b2;box-shadow:0 2px 8px rgba(8,145,178,.35)}
 .ov-panel{display:none;margin-bottom:20px}
-.ov-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
-@media(max-width:600px){.ov-kpis{grid-template-columns:1fr}}
-.ov-kpi{background:#fff;border-radius:12px;box-shadow:var(--sh);padding:18px 20px;cursor:pointer;transition:transform .15s,box-shadow .15s}
-.ov-kpi:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(15,23,42,.14)}
-.ov-kpi-n{font-size:42px;font-weight:900;line-height:1}
-.ov-kpi-l{font-size:11px;font-weight:700;color:#64748b;margin-top:6px;text-transform:uppercase;letter-spacing:.4px}
+.ov-kpis{display:flex;background:#fff;border-radius:12px;box-shadow:var(--sh);overflow:hidden;margin-bottom:16px}
+@media(max-width:560px){.ov-kpis{flex-direction:column}}
+.ov-kpi{flex:1;padding:14px 22px;display:flex;align-items:center;gap:14px;border-right:1px solid #f1f5f9;cursor:pointer;transition:background .15s;min-width:0}
+.ov-kpi:last-child{border-right:0}
+@media(max-width:560px){.ov-kpi{border-right:0;border-bottom:1px solid #f1f5f9}.ov-kpi:last-child{border-bottom:0}}
+.ov-kpi:hover{background:#f8fafc}
+.ov-kpi-accent{width:4px;height:40px;border-radius:3px;flex-shrink:0}
+.ov-kpi-n{font-size:30px;font-weight:900;line-height:1}
+.ov-kpi-l{font-size:10.5px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.4px;margin-top:3px}
 .ov-chart{background:#fff;border-radius:12px;box-shadow:var(--sh);padding:18px 22px}
 .ov-chart-t{font-size:13px;font-weight:800;color:#374151;margin-bottom:16px}
 .ov-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:9px}
@@ -895,17 +898,17 @@ function renderDashboard(){
   const n22=allMxEntries.filter(m=>m.includes('[2022]')).length;
   document.getElementById('ovPanel').innerHTML=`
     <div class="ov-kpis">
-      <div class="ov-kpi" style="border-top:3px solid #0ea5e9" onclick="fSec('all',null)">
-        <div class="ov-kpi-n" style="color:#0369a1">${total}</div>
-        <div class="ov-kpi-l">Tổng số đường hàn tại công trường</div>
+      <div class="ov-kpi" onclick="fSec('all',null)">
+        <div class="ov-kpi-accent" style="background:#0ea5e9"></div>
+        <div><div class="ov-kpi-n" style="color:#0369a1">${total}</div><div class="ov-kpi-l">Tổng đường hàn</div></div>
       </div>
-      <div class="ov-kpi" style="border-top:3px solid #a855f7" onclick="fSec('MX',null)">
-        <div class="ov-kpi-n" style="color:#7c3aed">${n21}</div>
-        <div class="ov-kpi-l">MX năm 2021</div>
+      <div class="ov-kpi" onclick="fSec('MX',null)">
+        <div class="ov-kpi-accent" style="background:#a855f7"></div>
+        <div><div class="ov-kpi-n" style="color:#7c3aed">${n21}</div><div class="ov-kpi-l">MX năm 2021</div></div>
       </div>
-      <div class="ov-kpi" style="border-top:3px solid #f59e0b" onclick="fSec('MX',null)">
-        <div class="ov-kpi-n" style="color:#b45309">${n22}</div>
-        <div class="ov-kpi-l">MX năm 2022</div>
+      <div class="ov-kpi" onclick="fSec('MX',null)">
+        <div class="ov-kpi-accent" style="background:#f59e0b"></div>
+        <div><div class="ov-kpi-n" style="color:#b45309">${n22}</div><div class="ov-kpi-l">MX năm 2022</div></div>
       </div>
     </div>
     <div class="ov-segs">
