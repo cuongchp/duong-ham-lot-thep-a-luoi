@@ -243,6 +243,41 @@ tfoot td{background:var(--bp);font-weight:700;font-size:12px;color:var(--bd);pad
 .mx-yr-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px;}
 .mx-yr-chip{background:#ede9fe;color:#5b21b6;border-radius:6px;padding:3px 9px;font-size:11.5px;font-weight:600;}
 .mx-yr-chip.y22{background:#fef3c7;color:#92400e;}
+.weld-pop-ov{display:none;position:fixed;inset:0;z-index:950;background:rgba(15,23,42,.3);align-items:center;justify-content:center;padding:16px}
+.weld-pop-ov.open{display:flex}
+.weld-pop{width:min(500px,calc(100vw - 24px));background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 28px 70px rgba(15,23,42,.35);animation:segZoom .28s cubic-bezier(.18,.9,.24,1);}
+.weld-pop.dragging{box-shadow:0 32px 80px rgba(15,23,42,.4);transition:none;}
+.wp-top{padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:grab;user-select:none;touch-action:none}
+.wp-top.dragging{cursor:grabbing}
+.wp-stt-box{width:46px;height:46px;border-radius:12px;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:#fff;flex-shrink:0;border:2px solid rgba(255,255,255,.35)}
+.wp-head{flex:1;min-width:0}
+.wp-head-t{font-size:15px;font-weight:800;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wp-head-s{font-size:11px;color:rgba(255,255,255,.82);margin-top:2px}
+.wp-close{width:30px;height:30px;border:0;border-radius:50%;background:rgba(255,255,255,.18);color:#fff;font-size:20px;line-height:1;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.wp-close:hover{background:rgba(255,255,255,.32)}
+.wp-body{padding:16px 20px 4px;background:linear-gradient(180deg,#fff,#f9f7ff)}
+.wp-pills{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px}
+.wp-pill{display:inline-flex;align-items:center;gap:5px;background:#f3f4f6;border:1px solid #e5e7eb;border-radius:999px;padding:4px 12px;font-size:12px;font-weight:700;color:#374151}
+.wp-sec{margin-bottom:12px}
+.wp-sec-title{font-size:11px;font-weight:800;color:#6b21a8;text-transform:uppercase;letter-spacing:.6px;margin-bottom:7px;display:flex;align-items:center;gap:8px}
+.wp-sec-title::after{content:'';flex:1;height:1px;background:#e9d5ff}
+.wp-mx-chips{display:flex;flex-wrap:wrap;gap:6px}
+.wp-mx-chip{display:inline-flex;align-items:center;gap:5px;background:#ede9fe;color:#5b21b6;border-radius:8px;padding:5px 10px;font-size:11.5px;font-weight:700}
+.wp-mx-chip .wp-yr{background:#6b21a8;color:#fff;border-radius:4px;padding:1px 6px;font-size:10px;font-weight:800}
+.wp-mx-chip.y22{background:#fef3c7;color:#92400e}
+.wp-mx-chip.y22 .wp-yr{background:#b45309;color:#fff}
+.wp-cb-chips{display:flex;flex-wrap:wrap;gap:5px}
+.wp-cb-chip{background:#f0fdf4;color:#166534;border:1px solid #bbf7d0;border-radius:6px;padding:3px 9px;font-size:11px;font-weight:600}
+.wp-tb-chip{background:#fff7ed;color:#92400e;border:1px solid #fed7aa;border-radius:6px;padding:3px 9px;font-size:11px;font-weight:600}
+.wp-empty{color:#9ca3af;font-size:11.5px;font-style:italic}
+.wp-note{font-size:12px;color:#6b7280;font-style:italic;background:#f9fafb;border-radius:6px;padding:6px 10px}
+.wp-footer{display:flex;align-items:center;justify-content:space-between;border-top:1px solid #f0e9ff;padding:12px 20px;gap:8px;background:#fdfaff}
+.wp-nav{display:flex;gap:6px}
+.wp-nav-btn{border:1px solid #ddd6fe;background:#fff;color:#6b21a8;border-radius:999px;padding:6px 16px;font-size:12px;font-weight:700;cursor:pointer;transition:background .12s}
+.wp-nav-btn:hover:not(:disabled){background:#ede9fe}
+.wp-nav-btn:disabled{opacity:.32;cursor:default}
+.wp-tbl-btn{background:#6b21a8;color:#fff;border:0;border-radius:999px;padding:6px 16px;font-size:12px;font-weight:700;cursor:pointer;transition:background .12s}
+.wp-tbl-btn:hover{background:#7c3aed}
 </style>
 </head>
 <body>
@@ -742,7 +777,9 @@ function showDetail(stt){
   mr.style.outline='3px solid #facc15';
   setTimeout(()=>mr.style.outline='',1800);
 }
-function selectHdrWeld(stt){
+function selectHdrWeld(stt){openWeldPop(stt);}
+function gotoWeldTable(stt){
+  document.getElementById('weldPopOv').classList.remove('open');
   cStt=stt;cS='all';cQ='';cP=1;
   const s=document.getElementById('srch');if(s)s.value='';
   document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
@@ -903,6 +940,78 @@ function rHdrTicks(){
 rHdrTicks();
 syncHdrSpace();
 if(window.ResizeObserver)new ResizeObserver(syncHdrSpace).observe(document.querySelector('.hdr'));
+// === WELD POINT DETAIL POPUP ===
+let weldDrag=null;
+function openWeldPop(stt){
+  const r=aD.find(x=>x.stt===stt);
+  if(!r)return;
+  const th=SEG_THEME[r.phan_doan]||['#374151','#6b7280'];
+  const mxList=r.mo_ta_list.filter(m=>m.includes('-MX'));
+  const cbList=r.mo_ta_list.filter(m=>m.includes('-CB-'));
+  const tbList=r.mo_ta_list.filter(m=>m.includes('-TB-')||m.includes('(TB)'));
+  const mxHtml=mxList.length
+    ?mxList.map(m=>{const yr=m.match(/\[(\d{4})\]/);const nm=m.replace(/\s*\[\d{4}\]/,'');const c22=yr&&yr[1]==='2022';return `<span class="wp-mx-chip${c22?' y22':''}">${nm}${yr?`<span class="wp-yr">${yr[1]}</span>`:''}</span>`;}).join('')
+    :'<span class="wp-empty">Chưa có MX</span>';
+  const cbHtml=cbList.map(c=>`<span class="wp-cb-chip">${c}</span>`).join('');
+  const tbHtml=tbList.map(t=>`<span class="wp-tb-chip">${t}</span>`).join('');
+  const allS=aD.slice().sort((a,b)=>a.stt-b.stt);
+  const idx=allS.findIndex(x=>x.stt===stt);
+  const prev=idx>0?allS[idx-1].stt:null;
+  const next=idx<allS.length-1?allS[idx+1].stt:null;
+  const pop=document.getElementById('weldPop');
+  pop.classList.remove('dragging');
+  pop.style.position='';pop.style.left='';pop.style.top='';pop.style.width='';
+  pop.innerHTML=`<div class="wp-top" style="background:linear-gradient(90deg,${th[0]},${th[1]})" onpointerdown="startWeldDrag(event)">
+    <div class="wp-stt-box">${r.stt}</div>
+    <div class="wp-head"><div class="wp-head-t">Đường hàn ĐH ${r.stt}</div><div class="wp-head-s">${r.phan_doan} &bull; Chiều dày ${r.chieu_day} mm</div></div>
+    <button class="wp-close" onclick="document.getElementById('weldPopOv').classList.remove('open')">&#215;</button>
+  </div>
+  <div class="wp-body">
+    <div class="wp-pills"><span class="wp-pill">&#128205; ${r.ly_trinh}</span><span class="wp-pill">&#128231; ${r.phan_doan}</span></div>
+    <div class="wp-sec"><div class="wp-sec-title">&#128279; Măng xông (${mxList.length} vị trí)</div><div class="wp-mx-chips">${mxHtml}</div></div>
+    ${cbList.length?`<div class="wp-sec"><div class="wp-sec-title">&#128295; Xử lý cơ bản CB (${cbList.length})</div><div class="wp-cb-chips">${cbHtml}</div></div>`:''}
+    ${tbList.length?`<div class="wp-sec"><div class="wp-sec-title">&#9650; Tăng cường TB (${tbList.length})</div><div class="wp-cb-chips">${tbHtml}</div></div>`:''}
+    ${r.ghi_chu?`<div class="wp-sec"><div class="wp-sec-title">&#128203; Ghi chú</div><div class="wp-note">${r.ghi_chu}</div></div>`:''}
+  </div>
+  <div class="wp-footer">
+    <div class="wp-nav">
+      <button class="wp-nav-btn" onclick="openWeldPop(${prev})" ${prev===null?'disabled':''}>&#9664; Trước</button>
+      <button class="wp-nav-btn" onclick="openWeldPop(${next})" ${next===null?'disabled':''}>Tiếp &#9654;</button>
+    </div>
+    <button class="wp-tbl-btn" onclick="gotoWeldTable(${r.stt})">&#128203; Xem bảng</button>
+  </div>`;
+  const ov=document.getElementById('weldPopOv');
+  pop.style.animation='none';pop.offsetHeight;pop.style.animation='segZoom .28s cubic-bezier(.18,.9,.24,1)';
+  ov.classList.add('open');
+}
+function closeWeldPop(ev){
+  if(ev&&ev.target!==document.getElementById('weldPopOv'))return;
+  document.getElementById('weldPopOv').classList.remove('open');
+}
+function startWeldDrag(ev){
+  if(ev.button!==undefined&&ev.button!==0)return;
+  if(ev.target.closest('.wp-close'))return;
+  const pop=document.getElementById('weldPop');
+  const rc=pop.getBoundingClientRect();
+  weldDrag={dx:ev.clientX-rc.left,dy:ev.clientY-rc.top,w:rc.width,h:rc.height};
+  pop.style.animation='none';pop.style.position='fixed';pop.style.width=rc.width+'px';pop.style.left=rc.left+'px';pop.style.top=rc.top+'px';
+  pop.classList.add('dragging');
+  pop.setPointerCapture?.(ev.pointerId);
+  window.addEventListener('pointermove',moveWeldDrag);
+  window.addEventListener('pointerup',endWeldDrag,{once:true});
+  ev.preventDefault();
+}
+function moveWeldDrag(ev){
+  if(!weldDrag)return;
+  const pop=document.getElementById('weldPop'),pad=8;
+  pop.style.left=Math.min(Math.max(pad,ev.clientX-weldDrag.dx),window.innerWidth-weldDrag.w-pad)+'px';
+  pop.style.top=Math.min(Math.max(pad,ev.clientY-weldDrag.dy),window.innerHeight-weldDrag.h-pad)+'px';
+}
+function endWeldDrag(){
+  document.getElementById('weldPop').classList.remove('dragging');
+  window.removeEventListener('pointermove',moveWeldDrag);
+  weldDrag=null;
+}
 // Fault zone tooltip
 (function(){
   const tip=document.createElement('div');tip.className='fz-tip';document.body.appendChild(tip);
@@ -918,5 +1027,8 @@ if(window.ResizeObserver)new ResizeObserver(syncHdrSpace).observe(document.query
   });
 })();
 </script>
+<div class="weld-pop-ov" id="weldPopOv" onclick="closeWeldPop(event)">
+  <div class="weld-pop" id="weldPop" onclick="event.stopPropagation()"></div>
+</div>
 </body>
 </html>
