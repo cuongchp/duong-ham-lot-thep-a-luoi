@@ -219,7 +219,7 @@ tfoot td{background:var(--bp);font-weight:700;font-size:12px;color:var(--bd);pad
 .hdr-legend .lg-mx2{background:#22d3ee;box-shadow:0 0 0 1px rgba(15,23,42,.55),0 0 7px rgba(34,211,238,.85)}
 .hdr-legend .lg-mx3{background:#fb7185;box-shadow:0 0 0 1px rgba(15,23,42,.55),0 0 7px rgba(251,113,133,.85)}
 .hdr-legend .lg-plain{background:rgba(255,255,255,.78);box-shadow:0 0 0 1px rgba(15,23,42,.35)}
-.hdr-chainage{position:relative;height:18px;margin:0 44px 6px 50px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);overflow:visible;color:#fff;transition:height .22s ease,background .22s ease,border-radius .22s ease,box-shadow .22s ease}
+.hdr-chainage{position:relative;height:18px;margin:0 50px 6px 50px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);overflow:visible;color:#fff;transition:height .22s ease,background .22s ease,border-radius .22s ease,box-shadow .22s ease}
 .hdr-chainage:before{content:"";position:absolute;left:0;right:0;top:50%;height:2px;transform:translateY(-50%);background:linear-gradient(90deg,rgba(255,255,255,.18),rgba(255,255,255,.7),rgba(255,255,255,.18));pointer-events:none}
 .geo-band{position:absolute;top:3px;bottom:3px;left:23.01%;width:37.84%;background:linear-gradient(180deg,rgba(251,146,60,.95),rgba(254,215,170,.92));border:1px solid rgba(154,52,18,.55);border-radius:999px;display:flex;align-items:center;justify-content:center;padding:0 10px;font-size:10px;font-weight:800;color:#7c2d12;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .km-mark{position:absolute;top:3px;bottom:3px;width:1px;background:rgba(255,255,255,.55)}
@@ -236,14 +236,15 @@ tfoot td{background:var(--bp);font-weight:700;font-size:12px;color:var(--bd);pad
 .hdr-seg2{flex:1;min-width:60px;display:flex;flex-direction:column;align-items:center;cursor:pointer;transition:all .15s;position:relative}
 .hdr-seg2:hover{filter:brightness(1.15)}
 .hdr-seg-bar2{width:100%;height:40px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;position:relative;overflow:hidden}
-.hdr-seg-ticks{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none;display:flex;align-items:stretch;justify-content:space-evenly}
-.hdr-seg-ticks .tick{border-radius:2px;margin:5px 0;pointer-events:auto;cursor:pointer;transition:transform .12s,box-shadow .12s}
-.hdr-seg-ticks .tick:hover{transform:scaleX(2.2)}
+.hdr-seg-ticks{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none}
+.hdr-seg-ticks .tick{border-radius:2px;pointer-events:auto;cursor:pointer;transition:box-shadow .12s;overflow:visible;position:absolute;top:5px;bottom:5px;transform:translateX(-50%)}
+.hdr-seg-ticks .tick:hover{box-shadow:0 0 0 1.5px #fff,0 0 10px rgba(255,255,255,.6)!important;z-index:5}
+.tick-num{position:absolute;top:0;bottom:0;left:50%;transform:translateX(-50%);width:14px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;text-orientation:mixed;font-size:8px;font-weight:800;color:#fff;text-shadow:0 0 4px #000,0 0 8px #000,0 1px 2px #000;opacity:0;transition:opacity .15s;pointer-events:none;line-height:1}
+.hdr-seg-ticks .tick:hover .tick-num{opacity:1}
 .hdr-seg-ticks .tick-plain{width:2px;background:rgba(255,255,255,.78);box-shadow:0 0 0 1px rgba(15,23,42,.25)}
 .hdr-seg-ticks .tick-mx1{width:3px;background:#facc15;box-shadow:0 0 0 1px rgba(15,23,42,.55),0 0 7px rgba(250,204,21,.9)}
 .hdr-seg-ticks .tick-mx2{width:3px;background:#22d3ee;box-shadow:0 0 0 1px rgba(15,23,42,.55),0 0 7px rgba(34,211,238,.9)}
 .hdr-seg-ticks .tick-mx3{width:3px;background:#fb7185;box-shadow:0 0 0 1px rgba(15,23,42,.55),0 0 7px rgba(251,113,133,.9)}
-.hdr-seg-ticks .tick-cbcv{position:relative}
 .hdr-seg-ticks .tick-cbcv:after{content:"";position:absolute;left:-1px;right:-1px;top:25%;bottom:25%;background:#020617;border-radius:2px;box-shadow:0 0 0 1px rgba(255,255,255,.35)}
 .hdr-seg-info2{width:100%;font-size:10px;color:rgba(255,255,255,.7);text-align:center;margin-top:4px;line-height:1.2;display:flex;align-items:center;justify-content:center;white-space:nowrap}
 .hdr-seg-thick{font-size:11px;font-weight:700;color:#fff}
@@ -346,24 +347,24 @@ tfoot td{background:var(--bp);font-weight:700;font-size:12px;color:var(--bd);pad
     <div class="hdr-chainage" aria-label="Lý trình và đoạn địa chất yếu dự kiến">
       <div class="geo-band">Đoạn địa chất yếu, đi qua các đứt gãy bậc IV,V</div>
       <div class="km-mark" style="left:0%"><strong>Km11+667,421</strong></div>
-      <div class="km-mark red km-start" style="left:23.01%"><strong>Km11+500</strong></div>
-      <div class="km-mark" style="left:16.56%"><strong>Km11+551,225</strong></div>
-      <div class="km-mark" style="left:23.84%"><strong>Km11+492,71</strong></div>
-      <div class="km-mark" style="left:32.45%"><strong>Km11+423,58</strong></div>
-      <div class="km-mark" style="left:56.29%"><strong>Km11+232,095</strong></div>
-      <div class="km-mark red km-end" style="left:60.85%"><strong>Km11+200</strong></div>
-      <div class="km-mark" style="left:86.75%"><strong>Km10+987,688</strong></div>
+      <div class="km-mark red km-start" style="left:21.38%"><strong>Km11+500</strong></div>
+      <div class="km-mark" style="left:14.85%"><strong>Km11+551,225</strong></div>
+      <div class="km-mark" style="left:22.41%"><strong>Km11+492,71</strong></div>
+      <div class="km-mark" style="left:31.24%"><strong>Km11+423,58</strong></div>
+      <div class="km-mark" style="left:55.70%"><strong>Km11+232,095</strong></div>
+      <div class="km-mark red km-end" style="left:59.80%"><strong>Km11+200</strong></div>
+      <div class="km-mark" style="left:87.07%"><strong>Km10+987,688</strong></div>
       <div class="km-mark" style="left:100%"><strong>Km10+886,719</strong></div>
-      <!-- Đứt gãy bậc IV - 9 vị trí -->
-      <div class="fault-zone" style="left:13.79%;width:.68%" data-tip="&#128308; Đứt gãy bậc IV  |  #9&#10;Từ: Km11+565,92&#10;Đến: Km11+570,69&#10;Chiều dài: 4,77 m"></div>
-      <div class="fault-zone" style="left:15.44%;width:.47%" data-tip="&#128308; Đứt gãy bậc IV  |  #8&#10;Từ: Km11+555,80&#10;Đến: Km11+559,05&#10;Chiều dài: 3,25 m"></div>
-      <div class="fault-zone" style="left:24.20%;width:.71%" data-tip="&#128308; Đứt gãy bậc IV  |  #7&#10;Từ: Km11+484,15&#10;Đến: Km11+489,79&#10;Chiều dài: 5,64 m"></div>
-      <div class="fault-zone" style="left:26.87%;width:.46%" data-tip="&#128308; Đứt gãy bậc IV  |  #6&#10;Từ: Km11+464,65&#10;Đến: Km11+468,41&#10;Chiều dài: 3,76 m"></div>
-      <div class="fault-zone" style="left:34.04%;width:.56%" data-tip="&#128308; Đứt gãy bậc IV  |  #5&#10;Từ: Km11+406,28&#10;Đến: Km11+410,84&#10;Chiều dài: 4,56 m"></div>
-      <div class="fault-zone" style="left:40.81%;width:.31%" data-tip="&#128308; Đứt gãy bậc IV  |  #4&#10;Từ: Km11+353,92&#10;Đến: Km11+356,43&#10;Chiều dài: 2,51 m"></div>
-      <div class="fault-zone" style="left:48.88%;width:7.45%" data-tip="&#128308; Đứt gãy bậc IV  |  #3&#10;Từ: Km11+231,79&#10;Đến: Km11+291,53&#10;Chiều dài: 59,74 m"></div>
-      <div class="fault-zone" style="left:59.31%;width:.25%" data-tip="&#128308; Đứt gãy bậc IV  |  #2&#10;Từ: Km11+205,89&#10;Đến: Km11+207,83&#10;Chiều dài: 1,94 m"></div>
-      <div class="fault-zone" style="left:74.72%;width:.34%" data-tip="&#128308; Đứt gãy bậc IV  |  #1&#10;Từ: Km11+081,44&#10;Đến: Km11+084,19&#10;Chiều dài: 2,75 m"></div>
+      <!-- Đứt gãy bậc IV - 9 vị trí (left% = (11667 - km_end) / 781 × 100) -->
+      <div class="fault-zone" style="left:12.33%;width:.61%" data-tip="&#128308; Đứt gãy bậc IV  |  #9&#10;Từ: Km11+565,92&#10;Đến: Km11+570,69&#10;Chiều dài: 4,77 m"></div>
+      <div class="fault-zone" style="left:13.82%;width:.42%" data-tip="&#128308; Đứt gãy bậc IV  |  #8&#10;Từ: Km11+555,80&#10;Đến: Km11+559,05&#10;Chiều dài: 3,25 m"></div>
+      <div class="fault-zone" style="left:22.69%;width:.72%" data-tip="&#128308; Đứt gãy bậc IV  |  #7&#10;Từ: Km11+484,15&#10;Đến: Km11+489,79&#10;Chiều dài: 5,64 m"></div>
+      <div class="fault-zone" style="left:25.43%;width:.48%" data-tip="&#128308; Đứt gãy bậc IV  |  #6&#10;Từ: Km11+464,65&#10;Đến: Km11+468,41&#10;Chiều dài: 3,76 m"></div>
+      <div class="fault-zone" style="left:32.80%;width:.58%" data-tip="&#128308; Đứt gãy bậc IV  |  #5&#10;Từ: Km11+406,28&#10;Đến: Km11+410,84&#10;Chiều dài: 4,56 m"></div>
+      <div class="fault-zone" style="left:39.76%;width:.32%" data-tip="&#128308; Đứt gãy bậc IV  |  #4&#10;Từ: Km11+353,92&#10;Đến: Km11+356,43&#10;Chiều dài: 2,51 m"></div>
+      <div class="fault-zone" style="left:48.08%;width:7.65%" data-tip="&#128308; Đứt gãy bậc IV  |  #3&#10;Từ: Km11+231,79&#10;Đến: Km11+291,53&#10;Chiều dài: 59,74 m"></div>
+      <div class="fault-zone" style="left:58.79%;width:.25%" data-tip="&#128308; Đứt gãy bậc IV  |  #2&#10;Từ: Km11+205,89&#10;Đến: Km11+207,83&#10;Chiều dài: 1,94 m"></div>
+      <div class="fault-zone" style="left:74.62%;width:.35%" data-tip="&#128308; Đứt gãy bậc IV  |  #1&#10;Từ: Km11+081,44&#10;Đến: Km11+084,19&#10;Chiều dài: 2,75 m"></div>
     </div>
     <div class="hdr-diag2">
       <div class="hdr-nd">
@@ -371,37 +372,37 @@ tfoot td{background:var(--bp);font-weight:700;font-size:12px;color:var(--bd);pad
         <div class="hdr-nd-lbl">Chạc 3</div>
         <div class="hdr-nd-km">Km11+667</div>
       </div>
-      <div class="hdr-seg2" onclick="openSegPop('PĐ 1',event)" style="flex:25">
+      <div class="hdr-seg2" onclick="openSegPop('PĐ 1',event)" style="flex:116">
         <div class="hdr-seg-bar2" style="background:linear-gradient(90deg,#1e40af,#2563eb);border-radius:4px 0 0 4px">
           <div class="hdr-seg-ticks" id="ht-pd1"></div>
         </div>
         <div class="hdr-seg-info2"><button class="tab hdr-seg-tab pd1" data-sec="PĐ 1" onclick="event.stopPropagation();fSec('PĐ 1',this)">PĐ1-38mm</button></div>
       </div>
-      <div class="hdr-seg2" onclick="openSegPop('PĐ 2',event)" style="flex:11">
+      <div class="hdr-seg2" onclick="openSegPop('PĐ 2',event)" style="flex:59">
         <div class="hdr-seg-bar2" style="background:linear-gradient(90deg,#166534,#16a34a)">
           <div class="hdr-seg-ticks" id="ht-pd2"></div>
         </div>
         <div class="hdr-seg-info2"><button class="tab hdr-seg-tab pd2" data-sec="PĐ 2" onclick="event.stopPropagation();fSec('PĐ 2',this)">PĐ2-18mm</button></div>
       </div>
-      <div class="hdr-seg2" onclick="openSegPop('PĐ 3',event)" style="flex:13">
+      <div class="hdr-seg2" onclick="openSegPop('PĐ 3',event)" style="flex:69">
         <div class="hdr-seg-bar2" style="background:linear-gradient(90deg,#92400e,#d97706)">
           <div class="hdr-seg-ticks" id="ht-pd3"></div>
         </div>
         <div class="hdr-seg-info2"><button class="tab hdr-seg-tab pd3" data-sec="PĐ 3" onclick="event.stopPropagation();fSec('PĐ 3',this)">PĐ3-20mm</button></div>
       </div>
-      <div class="hdr-seg2" onclick="openSegPop('PĐ 4',event)" style="flex:36">
+      <div class="hdr-seg2" onclick="openSegPop('PĐ 4',event)" style="flex:191">
         <div class="hdr-seg-bar2" style="background:linear-gradient(90deg,#831843,#db2777)">
           <div class="hdr-seg-ticks" id="ht-pd4"></div>
         </div>
         <div class="hdr-seg-info2"><button class="tab hdr-seg-tab pd4" data-sec="PĐ 4" onclick="event.stopPropagation();fSec('PĐ 4',this)">PĐ4-20mm</button></div>
       </div>
-      <div class="hdr-seg2" onclick="openSegPop('PĐ 5',event)" style="flex:46">
+      <div class="hdr-seg2" onclick="openSegPop('PĐ 5',event)" style="flex:245">
         <div class="hdr-seg-bar2" style="background:linear-gradient(90deg,#5b21b6,#7c3aed)">
           <div class="hdr-seg-ticks" id="ht-pd5"></div>
         </div>
         <div class="hdr-seg-info2"><button class="tab hdr-seg-tab pd5" data-sec="PĐ 5" onclick="event.stopPropagation();fSec('PĐ 5',this)">PĐ5-18mm</button></div>
       </div>
-      <div class="hdr-seg2" onclick="openSegPop('PĐ 6',event)" style="flex:20">
+      <div class="hdr-seg2" onclick="openSegPop('PĐ 6',event)" style="flex:101">
         <div class="hdr-seg-bar2" style="background:linear-gradient(90deg,#134e4a,#0d9488);border-radius:0 4px 4px 0">
           <div class="hdr-seg-ticks" id="ht-pd6"></div>
         </div>
@@ -1036,14 +1037,18 @@ function rHdrTicks(){
     const el=document.getElementById(pdMap[pd]);
     if(!el)return;
     const rs=aD.filter(r=>r.phan_doan===pd);
+    const route=SI[pd]?SI[pd].r:'';
+    const pts=route.split('÷').map(s=>s.trim());
+    const segStart=parseLt(pts[0]||'');
+    const segEnd=parseLt(pts[1]||'');
+    const segLen=Math.abs(segStart-segEnd)||1;
     el.innerHTML=rs.map(r=>{
       const mxC=mxCount(r);
       const cls=mxC?`tick-mx${Math.min(mxC,3)}`:'tick-plain';
       const cbcv=r.mo_ta_list.some(m=>m.toUpperCase().includes('CBCV'));
-      const mxList=r.mo_ta_list.filter(m=>m.includes('-MX'));
-      const mxDetail=mxList.length?'\n──────────────\n'+mxList.join('\n'):'';
-      const ttl=(mxC?`${mxC} MX`:'Chưa MX')+(cbcv?' - CBCV':'')+mxDetail;
-      return `<div class="tick ${cls}${cbcv?' tick-cbcv':''}" title="ĐH ${r.stt} - ${r.ly_trinh} - ${ttl}" onmouseenter="hoverWeld(${r.stt})" onmouseleave="leaveWeld()" onclick="event.stopPropagation();pinWeld(${r.stt})"></div>`;
+      const wKm=parseLt(r.ly_trinh);
+      const pct=Math.max(0,Math.min(100,(segStart-wKm)/segLen*100));
+      return `<div class="tick ${cls}${cbcv?' tick-cbcv':''}" style="left:${pct.toFixed(2)}%" onmouseenter="hoverWeld(${r.stt})" onmouseleave="leaveWeld()" onclick="event.stopPropagation();pinWeld(${r.stt})"><span class="tick-num">${r.stt}</span></div>`;
     }).join('');
   });
 }
