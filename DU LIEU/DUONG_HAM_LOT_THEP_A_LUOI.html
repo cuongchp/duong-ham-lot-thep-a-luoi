@@ -284,6 +284,8 @@ tfoot td{background:var(--bp);font-weight:700;font-size:12px;color:var(--bd);pad
 .mx-yr-chip.y22{background:#fef3c7;color:#92400e;}
 .weld-pop-ov{display:none;position:fixed;inset:0;z-index:950;background:rgba(15,23,42,.3);align-items:center;justify-content:center;padding:16px}
 .weld-pop-ov.open{display:flex}
+.weld-pop-ov.hover-mode{background:transparent;pointer-events:none}
+.weld-pop-ov.hover-mode .weld-pop{pointer-events:all}
 .weld-pop{width:min(500px,calc(100vw - 24px));background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 28px 70px rgba(15,23,42,.35);animation:segZoom .28s cubic-bezier(.18,.9,.24,1);}
 .weld-pop.dragging{box-shadow:0 32px 80px rgba(15,23,42,.4);transition:none;}
 .wp-top{padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:grab;user-select:none;touch-action:none}
@@ -1041,7 +1043,7 @@ function rHdrTicks(){
       const mxList=r.mo_ta_list.filter(m=>m.includes('-MX'));
       const mxDetail=mxList.length?'\n──────────────\n'+mxList.join('\n'):'';
       const ttl=(mxC?`${mxC} MX`:'Chưa MX')+(cbcv?' - CBCV':'')+mxDetail;
-      return `<div class="tick ${cls}${cbcv?' tick-cbcv':''}" title="ĐH ${r.stt} - ${r.ly_trinh} - ${ttl}" onclick="event.stopPropagation();selectHdrWeld(${r.stt})"></div>`;
+      return `<div class="tick ${cls}${cbcv?' tick-cbcv':''}" title="ĐH ${r.stt} - ${r.ly_trinh} - ${ttl}" onmouseenter="hoverWeld(${r.stt})" onmouseleave="leaveWeld()" onclick="event.stopPropagation();pinWeld(${r.stt})"></div>`;
     }).join('');
   });
 }
@@ -1050,8 +1052,11 @@ syncHdrSpace();
 if(window.ResizeObserver)new ResizeObserver(syncHdrSpace).observe(document.querySelector('.hdr'));
 showDashboard(document.querySelector('.tab-ov'));
 // === WELD POINT DETAIL POPUP ===
-let weldDrag=null;
-function openWeldPop(stt){
+let weldDrag=null,weldPopPinned=false,weldHideTimer=null;
+function hoverWeld(stt){if(weldPopPinned)return;clearTimeout(weldHideTimer);openWeldPop(stt,false);}
+function leaveWeld(){if(weldPopPinned)return;weldHideTimer=setTimeout(()=>{if(!weldPopPinned)document.getElementById('weldPopOv').classList.remove('open');},250);}
+function pinWeld(stt){clearTimeout(weldHideTimer);openWeldPop(stt,true);}
+function openWeldPop(stt,pinned=true){
   const r=aD.find(x=>x.stt===stt);
   if(!r)return;
   const th=SEG_THEME[r.phan_doan]||['#374151','#6b7280'];
@@ -1075,7 +1080,7 @@ function openWeldPop(stt){
   pop.innerHTML=`<div class="wp-top" style="background:linear-gradient(90deg,${th[0]},${th[1]})" onpointerdown="startWeldDrag(event)">
     <div class="wp-stt-box">${r.stt}</div>
     <div class="wp-head"><div class="wp-head-t">Đường hàn ĐH ${r.stt}</div><div class="wp-head-s">${r.phan_doan} &bull; Chiều dày ${r.chieu_day} mm</div></div>
-    <button class="wp-close" onclick="document.getElementById('weldPopOv').classList.remove('open')">&#215;</button>
+    <button class="wp-close" onclick="weldPopPinned=false;document.getElementById('weldPopOv').classList.remove('open')">&#215;</button>
   </div>
   <div class="wp-body">
     <div class="wp-pills"><span class="wp-pill">&#128205; ${r.ly_trinh}</span><span class="wp-pill">&#128231; ${r.phan_doan}</span></div>
@@ -1092,12 +1097,15 @@ function openWeldPop(stt){
     </div>
     <button class="wp-tbl-btn" onclick="gotoWeldTable(${r.stt})">&#128203; Xem bảng</button>
   </div>`;
+  weldPopPinned=pinned;
   const ov=document.getElementById('weldPopOv');
+  ov.classList.toggle('hover-mode',!pinned);
   pop.style.animation='none';pop.offsetHeight;pop.style.animation='segZoom .28s cubic-bezier(.18,.9,.24,1)';
   ov.classList.add('open');
 }
 function closeWeldPop(ev){
   if(ev&&ev.target!==document.getElementById('weldPopOv'))return;
+  weldPopPinned=false;
   document.getElementById('weldPopOv').classList.remove('open');
 }
 function startWeldDrag(ev){
@@ -1140,7 +1148,7 @@ function endWeldDrag(){
 })();
 </script>
 <div class="weld-pop-ov" id="weldPopOv" onclick="closeWeldPop(event)">
-  <div class="weld-pop" id="weldPop" onclick="event.stopPropagation()"></div>
+  <div class="weld-pop" id="weldPop" onclick="event.stopPropagation()" onmouseenter="clearTimeout(weldHideTimer)" onmouseleave="if(!weldPopPinned)leaveWeld()"></div>
 </div>
 </body>
 </html>
