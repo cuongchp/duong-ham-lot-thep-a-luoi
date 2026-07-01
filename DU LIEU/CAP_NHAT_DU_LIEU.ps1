@@ -42,8 +42,9 @@ function Format-DocSize([long]$bytes) {
 $oldSummary = @{}
 if (Test-Path -LiteralPath $docJsonPath) {
     try {
-        $oldRaw = [System.IO.File]::ReadAllText($docJsonPath, [System.Text.Encoding]::UTF8)
-        foreach ($d in @($oldRaw | ConvertFrom-Json)) {
+        $oldRaw  = [System.IO.File]::ReadAllText($docJsonPath, [System.Text.Encoding]::UTF8)
+        $oldDocs = $oldRaw | ConvertFrom-Json   # Tach biet: tranh @(pipeline) wrapping bug PS5.1
+        foreach ($d in $oldDocs) {
             if ($d.name) { $oldSummary[$d.name] = [string]$d.summary }
         }
         Write-Host "  Da doc $($oldSummary.Count) summary cu tu tai-lieu.json"
